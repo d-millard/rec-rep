@@ -716,8 +716,7 @@ mutable mapping - dict
 
 
 def data_analytics(user):
-    avg = 0
-    ind = 0
+    avg, ind = 0, 0
     for index, val in enumerate(user):
         avg += val
         ind = index
@@ -731,13 +730,11 @@ def data_analytics(user):
         mid = (median_plus + median_minus) / 2
     single_set = set(user)
     counted = 0
-    count = 0
+    count = None
     for num in single_set:
-        if user.count(num) > counted:
+        if user.count(num) > counted and user.count(num) > 1:
             counted = user.count(num)
             count = num
-    if counted == 1:
-        count = None
     return avg, mid, count
 
 
