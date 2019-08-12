@@ -747,3 +747,163 @@ if __name__ == "__main__":
 # im tried now
 
 
+def text_valid(string):
+    user = input(f'Some may be: hair color, cuteness, prettiness, straight fingers, etc...\n{string}')
+    user_set = set()
+    while True:
+        if user.lower() == "exit":
+            return user_set
+        if user.replace(" ", "").isalpha():
+            user_set.add(user)
+        user = input(f'{" " * (len(string) - 2)}: ')
+
+
+def d_v_g():
+    """
+    could have used enumerate(ser, 1) to remove the -1 off the length comparisons and just have to -1 to set next list
+    but was too far into program and don't want to spend too much time on
+    """
+    d_string = text_valid('Please input attributes for David (type "exit"): ')
+    g_string = text_valid('Please input attributes for Grace (type "exit"): ')
+    similarities = list(d_string.intersection(g_string))
+    dif_d = list(d_string.difference(g_string))
+    dif_g = list(g_string.difference(d_string))
+    print(f"\n"
+          f" David's Differences:         Similarities:         Grace's Differences:".replace("\t", " "))
+    if similarities != [] and dif_d != [] and dif_g != []:
+        for (d_i, d_v), (sm_i, sm_v), (g_i, g_v) in zip(enumerate(dif_d), enumerate(similarities), enumerate(dif_g)):
+            print(f" -{d_v}{' ' * (28 - len(d_v))}-{sm_v}{' ' * (21 - len(sm_v))}-{g_v}")
+            if sm_i == len(similarities) - 1 and d_i < len(dif_d) - 1 and g_i < len(dif_g) - 1:
+                # no similarities - yes david - yes grace
+                dif_dd = dif_d[d_i + 1:]
+                dif_gg = dif_g[g_i + 1:]
+                for(d_ii, d_vv), (g_ii, g_vv) in zip(enumerate(dif_dd), enumerate(dif_gg)):
+                    print(f" -{d_vv}{' ' * (28 - len(d_vv))}{' ' * 22}-{g_vv}")
+                    if d_ii == len(dif_dd) - 1 and g_ii < len(dif_gg) - 1:
+                        # no similarities - no david - yes grace
+                        dif_ggg = dif_gg[g_ii + 1:]
+                        for g_vvv in dif_ggg:
+                            print(f" {' ' * 51}-{g_vvv}")
+                    elif d_ii < len(dif_dd) - 1 and g_ii == len(dif_gg) - 1:
+                        # no similarities - yes david - no grace
+                        dif_ddd = dif_dd[d_ii + 1:]
+                        for d_vvv in dif_ddd:
+                            print(f" -{d_vvv}")
+            elif sm_i < len(similarities) - 1 and d_i == len(dif_d) - 1 and g_i < len(dif_g) - 1:
+                # yes similarities - no david - yes grace
+                similarities_ = similarities[sm_i + 1:]
+                dif_gg = dif_g[g_i + 1:]
+                for (sm_ii, sm_vv), (g_ii, g_vv) in zip(enumerate(similarities_), enumerate(dif_gg)):
+                    print(f" {' ' * 29}-{sm_vv}{' ' * (21 - len(sm_vv))}-{g_vv}")
+                    if sm_ii == len(similarities_) - 1 and g_ii < len(dif_gg) - 1:
+                        # no similarities - no david - yes grace
+                        dif_ggg = dif_gg[g_ii + 1:]
+                        for g_vvv in dif_ggg:
+                            print(f" {' ' * 51}-{g_vvv}")
+                    elif sm_ii < len(similarities_) - 1 and g_ii == len(dif_gg) - 1:
+                        # yes similarities - no david - no grace
+                        similarities__ = similarities_[sm_ii + 1:]
+                        for sm_vvv in similarities__:
+                            print(f" {' ' * 29}-{sm_vvv}")
+            elif sm_i < len(similarities) - 1 and d_i < len(dif_d) - 1 and g_i == len(dif_g) - 1:
+                # yes similarities - yes david - no grace
+                similarities_ = similarities[sm_i + 1:]
+                dif_dd = dif_d[d_i + 1:]
+                for (sm_ii, sm_vv), (d_ii, d_vv) in zip(enumerate(similarities_), enumerate(dif_dd)):
+                    print(f" -{d_vv}{' ' * (28 - len(d_vv))}-{sm_vv}")
+                    if sm_ii == len(similarities_) - 1 and d_ii < len(dif_dd) - 1:
+                        # no similarities - yes david - no grace
+                        dif_ddd = dif_dd[d_ii + 1:]
+                        for d_vvv in dif_ddd:
+                            print(f" -{d_vvv}")
+                    elif sm_ii < len(similarities_) - 1 and d_ii == len(dif_dd) - 1:
+                        # yes similarities - no david - no grace
+                        similarities__ = similarities_[sm_ii + 1:]
+                        for sm_vvv in similarities__:
+                            print(f" {' ' * 29}-{sm_vvv}")
+            elif sm_i == len(similarities) - 1 and d_i == len(dif_d) - 1 and g_i < len(dif_g) - 1:
+                # no similarities - no david - yes grace
+                dif_gg = dif_g[g_i + 1:]
+                for g_vv in dif_gg:
+                    print(f" {' ' * 51}-{g_vv}")
+            elif sm_i < len(similarities) - 1 and d_i == len(dif_d) - 1 and g_i == len(dif_g) - 1:
+                # yes similarities - no david - no grace
+                similarities_ = similarities[sm_i + 1:]
+                for sm_vv in similarities_:
+                    print(f" {' ' * 29}-{sm_vv}")
+            elif sm_i == len(similarities) - 1 and d_i < len(dif_d) - 1 and g_i == len(dif_g) - 1:
+                # no similarities - yes david - no grace
+                dif_dd = dif_d[d_i + 1:]
+                for d_vv in dif_dd:
+                    print(f" -{d_vv}")
+    elif similarities != [] and dif_d == [] and dif_g != []:
+        # yes similarities - no david - yes grace
+        for (sm_i, sm_v), (g_i, g_v) in zip(enumerate(similarities), enumerate(dif_g)):
+            print(f" {' ' * 29}-{sm_v}{' ' * (21 - len(sm_v))}-{g_v}")
+            if sm_i == len(similarities) - 1 and g_i < len(dif_g) - 1:
+                # no similarities - no david - yes grace
+                dif_gg = dif_g[g_i + 1:]
+                for g_vv in dif_gg:
+                    print(f" {' ' * 51}-{g_vv}")
+            elif sm_i < len(similarities) - 1 and g_i == len(dif_g) - 1:
+                # yes similarities - no david - no grace
+                similarities_ = similarities[sm_i + 1:]
+                for sm_vv in similarities_:
+                    print(f" {' ' * 29}-{sm_vv}")
+    elif similarities == [] and dif_d != [] and dif_g != []:
+        # no similarities - yes david - yes grace
+        for (d_i, d_v), (g_i, g_v) in zip(enumerate(dif_d), enumerate(dif_g)):
+            print(f" -{d_v}{' ' * (28 - len(d_v))}{' ' * 22}-{g_v}")
+            if d_i == len(dif_d) - 1 and g_i < len(dif_g) - 1:
+                # no similarities - no david - yes grace
+                dif_gg = dif_g[g_i + 1:]
+                for g_vv in dif_gg:
+                    print(f" {' ' * 51}-{g_vv}")
+            elif d_i < len(dif_d) - 1 and g_i == len(dif_g) - 1:
+                # no similarities - yes david - no grace
+                dif_dd = dif_d[d_i + 1:]
+                for d_vv in dif_dd:
+                    print(f" -{d_vv}")
+    elif similarities != [] and dif_d != [] and dif_g == []:
+        # yes similarities - yes david - no grace
+        for (sm_i, sm_v), (d_i, d_v) in zip(enumerate(similarities), enumerate(dif_d)):
+            print(f" -{d_v}{' ' * (28 - len(d_v))}-{sm_v}")
+            if sm_i == len(similarities) - 1 and d_i < len(dif_d) - 1:
+                # no similarities - yes david - no grace
+                dif_dd = dif_d[d_i + 1:]
+                for d_vv in dif_dd:
+                    print(f" -{d_vv}")
+            elif sm_i < len(similarities) - 1 and d_i == len(dif_d) - 1:
+                # yes similarities - no david - no grace
+                similarities_ = similarities[sm_i + 1:]
+                for sm_vv in similarities_:
+                    print(f" {' ' * 29}-{sm_vv}")
+    elif similarities != [] and dif_d == [] and dif_g == []:
+        # yes similarities - no david - no grace
+        for sm_v in similarities:
+            print(f" {' ' * 29}-{sm_v}")
+    elif similarities == [] and dif_d != [] and dif_g == []:
+        # no similarities - yes david - no grace
+        for d_v in dif_d:
+            print(f" -{d_v}")
+    elif similarities == [] and dif_d == [] and dif_g != []:
+        # no similarities - no david - yes grace
+        for g_v in dif_g:
+            print(f" {' ' * 51}-{g_v}")
+
+
+if __name__ == "__main__":
+    print("")
+    mean, median, mode = data_analytics([2, 5, 9, 3, 10, 11, 12, 13, 239487, 213, 45543])
+    print(f"mean = {mean:.2f}, median = {median}, mode = {mode if mode is not None else 'NO-MODE'}")
+    print("")
+    d_v_g()
+
+
+"""
+                                               : brown hair
+                                               : not cute
+                                               : not straight fingers
+                                               : not pretty
+                                               : exit
+"""
