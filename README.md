@@ -10,4 +10,3 @@ quick run of the basics
 more structured, 
 going over all the basics in depth, 
 higher end of beginner and lower end of intermediate
-# dont forget to fix this, missing beginner
