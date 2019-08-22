@@ -139,7 +139,7 @@ def is_prime(num):
 # - fir being where to start: optional
 # - sec being where to end: not optional
 # - thi being how many to go by 1, 2, 3, etc... each iteration: optional
-# in this evalutation the item is just added to the list and not evaluated with an expression
+# in this evaluation the item is just added to the list and not evaluated with an expression
 print([item for item in range(101) if is_prime(item)])
 # can then use filter with an expression
 # creates a dict of the prime number squares, key is the squared number, value is numbers that are divisions of square
@@ -169,6 +169,8 @@ pp(floats)
 
 # USEFUL ZEN
 # sometimes a complex comprehension is worse than than the corresponding for each loop
+# functional, no side-effects (runtime effects like printing and running anything)
+# if side-effects are need a for loop would be better way to go
+# use comprehensions for strictly non-complex construct building
 
 # ITERATION PROTOCOLS
-
