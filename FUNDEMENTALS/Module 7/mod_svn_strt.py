@@ -163,9 +163,14 @@ def if_convert_float(num):
 
 
 num_in = ["5.003", 623, 23.04, [4.22], {"hey": 32.2}, "33", -1222.23, -1]
-floats = [{"number": num, "format": f"({type(num)}), square = {float(num)*float(num):.2f}"}
+floats = [{"number": num, "format": f"({type(num)}), square = {float(num)**2:.2f}"}
           for num in num_in if if_convert_float(num)]
-pp(floats)
+# pp(floats)
+print()
+for item in floats:
+    (_, number), (_, form) = item.items()
+    print(f'{number}:\n\t{form}')
+print()
 
 # USEFUL ZEN
 # sometimes a complex comprehension is worse than than the corresponding for each loop
@@ -174,3 +179,153 @@ pp(floats)
 # use comprehensions for strictly non-complex construct building
 
 # ITERATION PROTOCOLS
+# comprehension and for loops are most frequently used when performing iteration
+# this is the act of taking each item in a series one by one and doing an evaluation upon it
+# though these iterations iterate over the series as a whole
+# though sometimes a fine grained controller may only want part of it
+# two concepts:
+"""
+iterable protocol:
+this is the collection/data structure that can be iterated through, list, dict, set...
+this gets an iterator from within the iterable
+iterator is an object of an iterable that traverses the iterable iterated -
+- this allows the movement through the sequences of the iterable
+can be passed to built in iter() function to get an iterator
+format - iterator = iter(iterable)
+iterator protocol:
+this is the item being in the iterable object, the items being iterated over
+all this does is get the next iterator in the series
+this is a iterable and can be used to get sequences in other methods like comprehensions and loops -
+- though it is not a collection type because it is more of a iterable collection type being looped through itself -
+- with the references to all the sequences within it but with no series itself
+can be passed to built in next() function to fetch the next item
+format - item = next(iterator)
+"""
+# every iterator is a iterable but not every iterable is a iterator
+# a list is not an iterator but a list iterator is a list
+# an iterator is an object from a collection that allows to traverse the sequences in the now iterator iterable
+# EX:
+# the example shows the iterable is the series and each item in it is an iterator
+# when iter() function is used a iterator object is used
+# this object is now an iterator of the iterable and each next() called on it goes more into the iterable
+# the iterator object is a reference to protocol of iterator and not equal to an iterator itself
+# the next() function allows the iterator object to keep going more and more into the series
+# the iter() returns an object that is a reference to all the iterations in the iterable
+# they can all be accessed with the next() function
+# the next() must be called for every item because the iterator item is not just the first item
+# this means you must call it for the first and every iteration until the end
+# another way to look at is the iterable is something that can be iterated through but when made an iterator -
+# - it is now iterating through itself so it is no longer an iterable but now an iterator and every item -
+# - is the next item in the original iterable now being iterated through with the iterator object
+iterable = ['Spring', 'Summer', 'Autumn', 'Winter']
+# each call of next to iterator moves it to next in sequence
+# the iter() returns a iterator which can be used to move through the iterable sequence that the iterator references
+iterator = iter(iterable)
+print(len(iterable))
+"""
+an iterator contains all sequences in iterable because it is the iterable but an object that 
+can move through its sequences
+this means you can loop through an iterator like you would with an iterable
+both are the same object so similar roles can be done with either
+for r in iterator:
+    print(r) # prints each sequence in iterator
+print(len(iterable)) does not work same as print(len(iterator))
+even though the iterator is an iterable it does not support protocols like size
+this is because they are used as a way to move through the iterable object referenced 
+but not as a direct copy of the iterable but a separate object that is a iterable with the ability to step through
+"""
+print(iterator)
+print(next(iterator))
+print(next(iterator))
+print(next(iterator))
+print(iterator)
+print(next(iterator))
+# when getting to end of iterable with next() function a StopIteration exception is raised
+# print(next(iterator))  throws a stopIteration error
+# EX:
+# in this cas it is possible to get an iterable and return the first iterator in the series
+# if it is empty a StopIteration will be raised and therefore can be handled to represent an empty iterable
+
+
+def first(iterable):
+    try:
+        return next(iter(iterable))
+    except StopIteration:
+        print("iterable is empty")
+        # raise StopIteration("iterable is empty")
+
+
+print(first({4, 5}))
+print(first([2, 93, 2]))
+print(first([]))
+# high level loops and comprehensions use this low level method
+
+# GENERATORS
+# specify iterable sequences
+# - all generators are iterators
+# - meaning they go from one sequence to another on iterable of reference
+# are lazily evaluated
+# - next value in the sequence is computed on demand
+# - only run code when requested to
+# can model infinite sequences
+# - such as data streams with no definite end
+# - can go forever unless sentinel/signal is sent to stop
+# are composable into pipelines
+# - for natural stream processing
+# - (not sure)
+# defined as:
+"""
+any function that uses that yield keyword at least once (can be used more than once)
+format:
+yield value
+may also have return keyword with no arguments
+this will most likely be to signal to stop the function from yielding anymore values
+like any function there is implicit return at end, (expected)
+"""
+
+
+def gen123():
+    yield 1
+    yield 2
+    yield 3
+
+
+# generator function is treated exactly like an iterator object
+# it is an object that will iterate when told until stopped at any point
+# the generator object is exactly an iterator object
+# though in its case, its iterable is its yields
+# this differs itself from an iterable because the yield can continue to any amount wanted
+g = gen123()
+print(g)
+print(next(g))
+print(next(g))
+print(next(g))
+# works same as going over with an iterator
+# a stopIteration error is raised when there is no more to yield
+# print(next(g)) # stopIteration error is raised
+# because generators are an iterator it is as a iterable meaning it can be used in the typical iterable ways
+"""
+prints all sequences yielded from generator function as if they were sequences in a list
+for r in gen123():
+    print(r) 
+"""
+# each call to the generator function returns a new object iterator
+# this is because it is a new object being made each time because the yielded iterator sequences are new objects
+# making it a new object
+# EX:
+h = gen123()
+i = gen123()
+print(h)
+print(i)
+print(h is i)
+# this can be shown through using one to move does not affect the others
+# independent movement
+print(next(h))
+print(next(h))
+print(next(i))
+
+
+
+
+# 3:10 but id recommend watching whole thing over
+
