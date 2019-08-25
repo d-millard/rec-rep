@@ -206,25 +206,13 @@ format - item = next(iterator)
 # an iterator is an object from a collection that allows to traverse the sequences in the now iterator iterable
 # EX:
 # the example shows the iterable is the series and each item in it is an iterator
-# when iter() function is used a iterator object is used
-# this object is now an iterator of the iterable and each next() called on it goes more into the iterable
-# the iterator object is a reference to protocol of iterator and not equal to an iterator itself
-# the next() function allows the iterator object to keep going more and more into the series
-# the iter() returns an object that is a reference to all the iterations in the iterable
-# they can all be accessed with the next() function
-# the next() must be called for every item because the iterator item is not just the first item
-# this means you must call it for the first and every iteration until the end
-# another way to look at is the iterable is something that can be iterated through but when made an iterator -
-# - it is now iterating through itself so it is no longer an iterable but now an iterator and every item -
-# - is the next item in the original iterable now being iterated through with the iterator object
+
 iterable = ['Spring', 'Summer', 'Autumn', 'Winter']
 # each call of next to iterator moves it to next in sequence
 # the iter() returns a iterator which can be used to move through the iterable sequence that the iterator references
 iterator = iter(iterable)
 print(len(iterable))
 """
-an iterator contains all sequences in iterable because it is the iterable but an object that 
-can move through its sequences
 this means you can loop through an iterator like you would with an iterable
 both are the same object so similar roles can be done with either
 for r in iterator:
@@ -259,6 +247,51 @@ print(first({4, 5}))
 print(first([2, 93, 2]))
 print(first([]))
 # high level loops and comprehensions use this low level method
+# true definition -
+"""
+an iterator is an object with a reference to the iterable with the iter() function
+it then uses this reference to output all sequences of the iterable
+it does this by every iteration going to the next item and saving its point as its new starting point -
+- in the next iteration
+it cannot go in any direction - when it gets to end it raises a StopIteration error
+EX:
+image this like a class that has iter() return the iterable to itself
+then using the next() to start at the first point and increase 
+index_of[x]
+x = x += 1
+"""
+# testing example:
+
+
+class Iterator:
+    def __init__(self, data):
+        self.data = data
+        self.index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        try:
+            temp = self.data[self.index]
+            self.index += 1
+            return temp
+        except IndexError:
+            raise StopIteration
+
+
+def func_iterate(user_in, sequence=None):
+    if sequence is None:
+        sequence = []
+    it = Iterator(user_in)
+    try:
+        while True:
+            sequence.append(it.__next__())
+    except StopIteration:
+        return sequence
+
+
+print(func_iterate("print_dis"))
 
 # GENERATORS
 # specify iterable sequences
@@ -270,9 +303,10 @@ print(first([]))
 # can model infinite sequences
 # - such as data streams with no definite end
 # - can go forever unless sentinel/signal is sent to stop
-# are composable into pipelines
+# able to make seamless combining pipelines
 # - for natural stream processing
-# - (not sure)
+# - this means when one generator feeds another data when requested,
+# - allowing a stream of conversions to take place from one generator to another
 # defined as:
 """
 any function that uses that yield keyword at least once (can be used more than once)
@@ -293,8 +327,9 @@ def gen123():
 # generator function is treated exactly like an iterator object
 # it is an object that will iterate when told until stopped at any point
 # the generator object is exactly an iterator object
-# though in its case, its iterable is its yields
+# though in its case, its iterable sequence as is its yields
 # this differs itself from an iterable because the yield can continue to any amount wanted
+# uses next() like a regular iterator
 g = gen123()
 print(g)
 print(next(g))
@@ -306,12 +341,14 @@ print(next(g))
 # because generators are an iterator it is as a iterable meaning it can be used in the typical iterable ways
 """
 prints all sequences yielded from generator function as if they were sequences in a list
+able to be used in comprehension and loops as well 
 for r in gen123():
     print(r) 
+[print(r) for r in gen123()]
 """
 # each call to the generator function returns a new object iterator
 # this is because it is a new object being made each time because the yielded iterator sequences are new objects
-# making it a new object
+# making it together a new object
 # EX:
 h = gen123()
 i = gen123()
@@ -323,9 +360,126 @@ print(h is i)
 print(next(h))
 print(next(h))
 print(next(i))
+# more advanced tracking on complex generator to view what is going on
+# EX:
+# the final statement is about the implicit return at the end of every function
+# if no more possible computation can be done
+
+
+def gen246():
+    """
+
+    """
+    x = 0
+    x += 2
+    print('About to yield 2')
+    yield 2
+    print('About to yield 4')
+    yield 4
+    print('About to yield 6')
+    yield 6
+    print('About to return')
+
+
+# the code executes just far enough to yield value
+# once value called for is yielded, block stops execute but stays waiting at yield to continue execution
+g_list = gen246()
+print(next(g_list))
+print("__yield next value__")
+# this shows how the generator function stayed at the first yield 2 and waited for further execution
+# yield is like a return for the function but remembers where it was returned and can be called to further function -
+# - from that point
+# iterators remember starting point and set every new iteration point as new starting point
+# could be like each yield is an increasing index
+print(next(g_list))
+print("__yield next value__")
+# the function resumes again, each yield is like a pause on the function
+# when called for next yield value it resumes where it left off
+print(next(g_list))
+print("__yield final value__")
+# once function gets to end of body with not more yields a StopIteration is thrown like every Iterator
+# print(next(g_list))  # raises StopIteration
+
+# STATEFUL GENERATOR FUNCTIONS
+# generators need to be treated like objects
+# once a generator object reference is created then it can be used
+# generators cannot be used as regular functions
+"""
+generators resume execution
+- when a yield is reached, instead of ending the function 
+- the function pauses and resumes when next yield is requested
+- ends when can no longer supply values or no values are requested
+can maintain state in local variables
+- work as standalone functions with blocks of variables and functionality
+complex control flow
+- allowing it to be resumed and paused continuously
+- allowing it to be ended with return
+lazy evaluation
+- evaluate to a yield only when requested, pauses once supplied 
+- then resuming from pause point
+"""
+# create a pipeline (generators feeding other generators to get continuous conversions)
+# pipeline_exercise.py  # example used
+# to display debugger mode and a generator pipeline
+# to use debugger mode use breakpoints on sections of code that want to see
+"""
+continue
+finishes current iteration of loop and begins the next immediately
+works with most loops, while - for
+"""
+"""
+MAKE SOME PIPELINE STUFF IN TESTING
+"""
+
+# LAZINESS AND THE INFINITE
+# generators are lazy meaning computation are happened just in time when next result is requested
+# - meaning blocks of logic and computations are only ran when a value is requested, they then stop when it is yielded
+# - but then finish/resume when another is requested
+# this means they can be used to model infinite sequences
+# values are only produced as requested by called
+# - can continuously call elements and generator will continuously produce values
+# no data structure needs to be built to contain elements
+# - each element is yielded individually meaning a data structure wouldn't be needed just the constant output of values
+# this allows them to be useful in sensor readings, infinite or large, mathematical series, massive files...
+# fibonacci or quick sort - maybe test
+# lucas() series,
+# EX:
+# this series produces the sum of the two proceeding values
+
+
+def lucas():
+    # its starts with yielding 2
+    yield 2
+    a = 2
+    b = 1
+    while True:
+        # it then yields b
+        # from there it uses tuple unpacking to set a to the now previous b
+        # and b to the the now previous a and itself (b)
+        # this works as a always being a reference the number in the iteration 2 before and b being the number 1 before
+        # though once unpacked - a is 1 behind and b is the value of that iteration
+        # they then are updated each request to increase 1 place each but still staying 2 and 1 before
+        yield b
+        a, b = b, a + b
+
+
+for i, v in enumerate(lucas()):
+    # if cannot exit terminate program some how
+    if i >= 101:
+        break
+    print(v)
+
+# GENERATOR
+# generator comprehensions
+#
+
+# TESTING
+# look up a video explaining quick sort
 
 
 
 
-# 3:10 but id recommend watching whole thing over
+
+
+
 
