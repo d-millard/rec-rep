@@ -471,10 +471,175 @@ for i, v in enumerate(lucas()):
 
 # GENERATOR
 # generator comprehensions
-#
+# these expressions are a cross between comprehensions and generator functions
+"""
+similar syntax to list comprehensions
+- similar syntax to list comprehension just with the [] replaced with ()
+create a generator object
+- instead of returning a collection it returns an generator iterator that can then be used
+concise
+- can turn general iterators into other generator object with special evaluation and filters
+lazy evaluation
+- works the same as using the yields from the generator but instead each yield passes through filter and evaluation
+- lazily evaluates
+- (if does not pass filter, the expression goes back to yield another until it itself can yield)
+"""
+# testing stuff:
+
+
+def square():
+    k = 0
+    while True:
+        yield k
+        k += 1
+
+
+def overlap(even, odd):
+    for e, o in zip(even, odd):
+        yield e
+        yield o
+
+
+def run():
+    even_squares = (k * k for k in square() if k % 2 == 0)
+    odd_squares = (k * k for k in square() if k % 2 != 0)
+    three_digit_squares = (k for k in overlap(even_squares, odd_squares))
+    for index, value in enumerate(three_digit_squares):
+        if len(str(value)) > 3:
+            break
+        elif len(str(value)) == 3:
+            print(value)
+
+
+run()
+"""
+syntax
+(expr(item) for item in iterable (optional if filter))
+like a list and set but is delimited by parenthesis ()
+"""
+# EX:
+# an object can be created of a generator to yield values that are evaluated
+hundred_squares = (x * x for x in range(101))
+print(hundred_squares)
+print(list(hundred_squares))
+# once the object generator has been used (yielded everything)
+# it cannot be reused because it has yielded everything possible
+# generators are single use objects
+# this is because they yield until they are unable to, once unable to the code is unusable
+# - in this case think about it waiting at the yield of 100, once called again the object is the same
+# - so it is still waiting at the 100 yield and because the range is until there, it won't yield anymore elements
+# - the same generator will always pause and resume
+print(list(hundred_squares))
+# though you can recreate this generator by assigning the expression to another object
+hundred_one_squares = (x * x for x in range(102))
+print(list(hundred_one_squares))
+# EX:
+# sum of 10 million numbers
+# if generator expression is contained in function, the use of the parenthesis are optional
+# this consumes significantly less memory due to the fact that each number yielded is terminated after evaluation
+# in the case of list, each number would have to be stored then summed
+# with a generator iterator it wil use the number and then forget about it meaning just the sum is stored
+# in expression, separate enclosing parenthesis aren't used to distinguish generator expression
+# like tuple, parenthesis are optional in sum cases
+print(sum(x*x for x in range(100001)))
+# can also use if filter predicate
+print(sum(x*x for x in range(100001) if is_prime(x)))
+
+# BATTERIES INCLUDED FOR ITERATION
+# any object that follows iterable or iterator protocol can be used for iteration
+# common built in functions for iterator operations
+# these functions provide the core of how iterators can be used
+# these allow very precise, concise, and readable code
+"""
+some met so far are
+enumerate
+- produces an index with value
+sum
+- sums together iterable (an iterators values) of all iterations
+"""
+# on top of built in functions -
+# - itertools (module) provides many other useful functions and generators to process streams of data
+# EX:
+# solving first sum of 1000 primes function using islice() and count() generators
+from itertools import islice, count
+"""
+islice(iterable, amount)
+- perform lazy slicing similar to list functionality 
+- first is iterable 
+- second second is the amount to stop slicing at
+- can be used to stop generator at set amount of yields
+count()
+- continuously generates a count of numbers 1, 2, 3, etc...
+"""
+thousand_primes = sum(islice((x for x in count() if is_prime(x)), 1000))
+print(thousand_primes)
+# two useful built in operators any and all
+# any is like or, checks if at least one iteration is evaluated to True
+# all is like and, checks if all iterations are evaluated to True
+# used on series of bool values
+# EX:
+print(any([False, False, True]))
+print(all([False, True, True]))
+# tests if any numbers in that range are prime
+print(any(is_prime(x) for x in range(1328, 1361)))
+# used to test if all square in a certain range are square
+# little bit of testing:
+# in this test the square generator is used to generate an infinite list of squares and is then tested to see if all
+# are true in the range 0 - 100
+# zip is then used to end it at 100 with the infinite test_square generator
+# then the all keyword is used to test if the range_test has all True iterations
+test_square = ((True if i * i == v else False) for i, v in enumerate(k * k for k in square()))
+range_test = (test for _, test in zip(range(101), test_square))
+print(all(range_test))
+# last useful tool is zip :
+# (just used this found out about it with research on how to iterate through two series for venn diagram)
+# - synchronize iterations over multiple iterable series
+# - ends both when one stops producing values
+# EX:
+sunday = [12, 14, 15, 17, 21, 22, 22, 23, 22]
+monday = [12, 14, 14, 16, 20, 21, 22, 22, 23]
+thursday = [12, 14, 15, 17, 21, 21, 22, 22, 23]
+# zip produces a tuple of all values
+for item in zip(enumerate(sunday), monday, thursday):
+    print(item)
+# tuple unpacking can then be used to get the individual elements
+for i_o, i_t, i_r in zip(enumerate(sunday), monday, thursday):
+    print(f"item one = {i_o}, item two = {i_t}, item three = {i_r}")
+# the tuple returned from zip can use other built ins, min(), max(), sum(), abs(), len()
+# in this case we can output the min max and sum/len or average using these built ins
+for temps in zip(sunday, monday, thursday):
+    print(f"min={(min(temps)):.2f}, max={(max(temps)):.2f}, average={(sum(temps) / len(temps)):.2f}")
+# though if one long iterable series to iterate through
+# chain:
+# lazily concatenates multiple series and iterates through all iterations
+# better than actual concatenation because instead of duplicating the data into an iterable, it makes an iterator
+# return an iteration of each element
+from itertools import chain
+# chains together all series to an iterator of all the data of each
+temperatures = chain(sunday, monday, thursday)
+# an iterator object
+print(temperatures)
+t = (t for t in temperatures)
+# each data in each list in order of how they were input
+for k in t:
+    print(k)
+# the evaluate can use truthy and falsely as evaluations too
+print(all(t > 0 for t in temperatures))
+# final lucas brings together everything learned
+# it show cases the use of filter predicates, infinite generators with generator comprehensions
+# and built in iteration tools like enumerate used with tuple unpacking
+# this uses the lucas() gnerator to generate numbers of the two numbers before it then filtered by primes
+# then yielded by generator comprehension to be requested by for loop to be printed out
+for index, x in enumerate(p for p in lucas() if is_prime(p)):
+    if index > 10:
+        break
+    print(x)
+
 
 # TESTING
 # look up a video explaining quick sort
+# pipeline
+# quick sort maybe
 
 
 
