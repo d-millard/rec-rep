@@ -647,4 +647,3 @@ for index, x in enumerate(p for p in lucas() if is_prime(p)):
 
 
 
-
