@@ -46,6 +46,7 @@ string_test = "this, is, a, string1"
 print(string_test.split(", "))
 # python is unicode based
 # can input other language characters or use unicode numbers with \u<unicode>
+print(u'\u002A', "here")
 
 # BYTES
 # immutable sequences of bytes

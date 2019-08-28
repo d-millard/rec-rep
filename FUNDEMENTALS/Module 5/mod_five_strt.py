@@ -729,18 +729,12 @@ def data_analytics(user):
         median_minus = user[-int(len(user) / 2)]
         mid = (median_plus + median_minus) / 2
     single_set = set(user)
-    counted = 0
-    count = None
+    counted, count = 0, None
     for num in single_set:
         if user.count(num) > counted and user.count(num) > 1:
             counted = user.count(num)
             count = num
     return avg, mid, count
-
-
-if __name__ == "__main__":
-    mean, median, mode = data_analytics([2, 5, 9, 3, 10, 11, 12, 13, 239487, 213, 45543, 3])
-    print(f"mean = {mean:.2f}, median = {median}, mode = {mode if mode is not None else 'NO-MODE'}")
 
 
 # create venn diagram with set, figure something out to do it ab
@@ -760,7 +754,7 @@ def text_valid(string):
 
 def d_v_g():
     """
-    could have used enumerate(ser, 1) to remove the -1 off the length comparisons and just have to -1 to set next list
+    could have used enumerate(ser, 1) to remove the -1 off the length comparisons and just have to -1 setting next list
     but was too far into program and don't want to spend too much time on
     """
     d_string = text_valid('Please input attributes for David (type "exit"): ')
@@ -894,7 +888,7 @@ def d_v_g():
 
 if __name__ == "__main__":
     print("")
-    mean, median, mode = data_analytics([2, 5, 9, 3, 10, 11, 12, 13, 239487, 213, 45543])
+    mean, median, mode = data_analytics([7, 25, 1003, 16, 17, 18, 21, 2005])
     print(f"mean = {mean:.2f}, median = {median}, mode = {mode if mode is not None else 'NO-MODE'}")
     print("")
     d_v_g()

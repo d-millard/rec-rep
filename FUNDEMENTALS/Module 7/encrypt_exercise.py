@@ -17,11 +17,19 @@ def run():
     # hard code key, make it random signs for each one
     # ref will be all the characters gotten from the documet
     # when the value is found
+    print(int(20 + (ran() * 80)))
+    while True:
+        ran_gen = uni_gen()
+        # this range gets all possible characters 0 - 97
+        for i in range(int(1 + ran() * 97)):
+            print(i)
+            print(next(ran_gen))
+
+
     ref = {'a': ['%', ]}
 
     for key in ref:
-        for value in (k for k in (item for item in uni_gen(81)) if str(chr(int(k, 16))) == key):
-            ref[key].append(value)
+        for value in (k for k in (item for item in uni_gen()) if str(chr(int(k, 16))) == key):
             # work on generator making random hexadecimal
             print(f"0x00{int(21 + (ran() * 60))}")
             ref[key].append(value)
@@ -33,9 +41,9 @@ def run():
 "C:\Test\he.txt"
 
 
-def uni_gen(num):
+def uni_gen(end=81):
     yield r"0x0020"
-    for i in range(21, num):
+    for i in range(21, end):
         if i % 10 != 0:
             yield r"0x00{}".format(str(i))
         else:
