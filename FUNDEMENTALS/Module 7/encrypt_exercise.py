@@ -15,18 +15,26 @@ def run():
     # the key would be on the set of characters actually used
     # wont need reference if do this
     # hard code key, make it random signs for each one
-    # ref will be all the characters gotten from the documet
+    # ref will be all the characters gotten from the document
     # when the value is found
+
     print(int(20 + (ran() * 80)))
-    while True:
+    while False:
         ran_gen = uni_gen()
         # this range gets all possible characters 0 - 97
         for i in range(int(1 + ran() * 97)):
             print(i)
             print(next(ran_gen))
 
-
+    # {'og_chr': {'new_chr': hexadecimal}, {'og_chr': {'new_chr': hexadecimal}, etc...(for all chr in the set)}
+    # key:      og_char = hexadecimal
+    #           og_char = hexadecimal
+    #           etc..(for all original character - new unicode character pairs) (new character never displayed)
     ref = {'a': ['%', ]}
+
+    # idea of use a set to to get all characters used and then use the randomizer to get their keys
+    # then use the gen function to get the unicode of the random character
+    # then replace all instances of original character, no newline all on one
 
     for key in ref:
         for value in (k for k in (item for item in uni_gen()) if str(chr(int(k, 16))) == key):
