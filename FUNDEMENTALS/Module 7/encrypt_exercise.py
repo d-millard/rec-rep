@@ -1,55 +1,47 @@
 from random import random as ran
+import os
 
 
 def run():
+    """
+    Main function for program.
+    Brings together files, all symbols, the unicode hexadecimal, and the key.
+    """
     while True:
         try:
             user_data = user_file("Please enter a valid file name you would like to encrypt: ")
+            f_temp = open("C:\\Test\\f_temp.txt", "w")
             break
         except ValueError as e:
             print(e)
-
-    # maybe scratch this idea
-    # dont know
-    # maybe make the program make a random key and output it with the encrypted document
-    # the key would be on the set of characters actually used
-    # wont need reference if do this
-    # hard code key, make it random signs for each one
-    # ref will be all the characters gotten from the document
-    # when the value is found
-
-    print(int(20 + (ran() * 80)))
-    while False:
-        ran_gen = uni_gen()
-        # this range gets all possible characters 0 - 97
-        for i in range(int(1 + ran() * 97)):
-            print(i)
-            print(next(ran_gen))
-
-    # {'og_chr': {'new_chr': hexadecimal}, {'og_chr': {'new_chr': hexadecimal}, etc...(for all chr in the set)}
-    # key:      og_char = hexadecimal
-    #           og_char = hexadecimal
-    #           etc..(for all original character - new unicode character pairs) (new character never displayed)
-    ref = {'a': ['%', ]}
-
-    # idea of use a set to to get all characters used and then use the randomizer to get their keys
-    # then use the gen function to get the unicode of the random character
-    # then replace all instances of original character, no newline all on one
-
-    for key in ref:
+    symbols = read_lines(user_data.name)
+    ref = dict()
+    for key in symbols:
         for value in (k for k in (item for item in uni_gen()) if str(chr(int(k, 16))) == key):
-            # work on generator making random hexadecimal
-            print(f"0x00{int(21 + (ran() * 60))}")
-            ref[key].append(value)
-            ref[key] = tuple(ref[key])
-    print(ref)
-
-
-# print(encrypt[int(ran() * len(encrypt))])
-"C:\Test\he.txt"
+            while True:
+                random = random_code()
+                if code_check(ref, random):
+                    print(f"Now encrypting {value}.")
+                    ref[str(chr(int(value, 16)))] = random
+                    break
+    write_copy(user_data.name, f_temp.name, ref)
+    write_source(user_data.name, f_temp.name)
+    f_temp.close()
+    os.remove(f_temp.name)
+    print("         key")
+    for key, value in ref.items():
+        print(f"        {key} = {str(chr(int(value, 16)))}")
 
 
 def uni_gen(end=81):
+    """
+    A generator to generate the unicode hexadecimal numbers.
+
+    Args:
+        end: optional. default english lexicon. can add more or littler characters
+    Yields:
+        the hexadecimal number
+    """
     yield r"0x0020"
     for i in range(21, end):
         if i % 10 != 0:
@@ -60,7 +52,108 @@ def uni_gen(end=81):
             yield r"0x00{}".format(str(i))
 
 
+def code_check(ref, random):
+    """
+    Checks if the random hexadecimal number is already in the ref dictionary as a random code.
+
+    Args:
+        ref: a reference dictionary of all characters and random hexadecimal codes
+        random: the random hexadecimal code generated
+    Returns:
+        bool of whether or not it is already a code
+    """
+    for _, v in ref.items():
+        if v == random:
+            return False
+    return True
+
+
+def random_code(string=None):
+    """
+    Generates a random code.
+
+    Args:
+        string: initializes the string argument
+    Returns:
+        the string argument of the random hexadecimal
+    """
+    ran_gen = uni_gen()
+    for i in range(int(1 + ran() * 97)):
+        string = next(ran_gen)
+    return string
+
+
+def read_lines(name):
+    """
+    Reads all characters in document and adds to set.
+    Set filters to be all unique characters in file.
+
+    Args:
+        name: name of file to open for reading
+    Returns:
+        the set of all unique characters
+    """
+    temp = open(name, "r")
+    symbols = set()
+    try:
+        while True:
+            string = next(temp).replace("\n", "")
+            for characters in string:
+                symbols.add(characters)
+    except StopIteration:
+        temp.close()
+        return symbols
+
+
+def write_copy(name, copy, ref):
+    """
+    Writes encryption to a temporary file to be copied to source.
+
+    Args:
+        name: name of file to open for reading
+        copy: name of file to write to temporarily
+        ref: a reference dictionary of all characters and random hexadecimal codes
+    """
+    temp = open(name, "r")
+    f_temp = open(copy, "w")
+    try:
+        while True:
+            string = next(temp).replace("\n", "")
+            for characters in string:
+                f_temp.write(ref[characters])
+    except StopIteration:
+        temp.close()
+        f_temp.close()
+
+
+def write_source(name, copy):
+    """
+    Writes encryption from temporary file to source file.
+
+    Args:
+        name: name of file to open for writing
+        copy: name of file to read from temporarily
+    """
+    f_temp = open(copy, "r")
+    temp = open(name, "w")
+    try:
+        while True:
+            string = next(f_temp)
+            temp.write(string)
+    except StopIteration:
+        f_temp.close()
+        temp.close()
+
+
 def user_file(text):
+    """
+    Validates user input file.
+
+    Args:
+        text: text to prompt user
+    Returns:
+        the valid file
+    """
     try:
         with open(input(text)) as f:
             return f
@@ -68,5 +161,6 @@ def user_file(text):
         raise ValueError(e)
 
 
-
-run()
+if __name__ == '__main__':
+    """source flow for program"""
+    run()
