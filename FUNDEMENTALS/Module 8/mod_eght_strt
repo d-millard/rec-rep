@@ -1,0 +1,76 @@
+# INTRODUCTION
+# classes are pythons tool for creating new types
+# all types, str, int, float, iterator....
+# they are all classes and can be altered
+# we can also create new type when making new classes
+# define structure an behaviour of objects
+# the class controls how to initialize an object of it
+# this means the class defines the protocols and methods than can be used on an object
+# it means what operations it can perform
+# the initialization of the object is also handled within the class itself
+# classes act like template or pattern that new objects initialize from
+# python can be used as either oop or functional
+# classes can make complex problems for tractable but simple solution more complicated
+
+# DEFINING CLASSES
+# classes can be new or built on existing ones, (int, str, list...)
+"""
+class
+-keyword used to define an initialize new classes
+class definitions are initialized with the class keyword followed by the class name
+# class names are CamelCase instead of separated by camel_case
+# capitol letter for every word
+EX:
+class TestClass:  # initializes a class
+"""
+# EX:
+
+
+class TestClass:
+    pass
+
+
+# more demonstrations go on airtravel.py
+# done on airtravel.py
+test = TestClass()
+# type is of class TestClass because it is an instance of the TestClass class
+# same as all type returns int, str, dict....
+print(type(test))
+
+# INSTANCE METHODS
+"""
+methods:
+functions defined within a class
+instance methods:
+functions that can be called on objects of class type, instances
+self:
+first argument to all instance methods
+# not sure significance yet
+"""
+
+
+class Flight:
+
+    # number is an instance method because it can be called to return the flight number
+    def number(self):
+        return "A0N60"
+
+
+test = Flight()
+# it is show here to return "A0N60" like in the number instance method in class Flight
+print(test.number())
+# can also be used in this form because it can accept self as an argument which accepts an instance of class
+# self doesn't need to fulfilled, the instance followed by . followed by method is syntactically identical to -
+# - Class.method.(instance), but with it textually different meaning when calling a method on the instance it -
+# - knows what instance the self object is referring to because it is being called upon it
+# rarely used form
+print(Flight.number(test))
+
+# INITIALIZERS
+# 
+
+
+
+
+
+
