@@ -13,6 +13,6 @@ higher end of beginner and lower end of intermediate
 # ML_Learn
 goes through machine learning
 from juptyer to tensorflow
-stopping python right now because -
-- i have java programming and logic II
+stopping python right now because-
+-i have java programming and logic II
 also want to learn for my capstone
