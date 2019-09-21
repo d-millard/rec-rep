@@ -18,7 +18,7 @@ classified accourding at amount an type of supervision, there are 4 major catago
 	semisupervised
 	reinforcement learning 
 
-_SUPERVISED LEARNING - pg(8)
+SUPERVISED LEARNING - pg(8)
 in this type of learning, the training data fed to algorithm includes desired solutions.
 these solutions are also known as, labels.
 
