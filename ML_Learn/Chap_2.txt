@@ -9,15 +9,19 @@ main steps that want to be taken:
 	3. discover and visualize data to gain insights (look at trends, anything a human can see)
 	4. prepare the data for machine learning algorithms (clean up data and optimize algorithm)
 	5. select model and train it (select type of algorthm...(get to this when I finish chap_1))
-	6. fine tune model (optimize it to be effective, efficient, and learn best...(get to this when I finish chap_1))
-	7. present solution (take what the model has learned and make sense of it and present...(get to this when I finish chap_1))
-	8. launch, monitor, and maintain system (make sure it works and keeps working...(get to this when I finish chap_1))
+	6. fine tune model (optimize it to be effective, efficient, and learn best...
+           (get to this when I finish chap_1))
+	7. present solution (take what the model has learned and make sense of it and present...
+           (get to this when I finish chap_1))
+	8. launch, monitor, and maintain system (make sure it works and keeps working...
+	   (get to this when I finish chap_1))
 
 WORKING WITH REAL DATA - pg(33)
 when learing, its best to use real data not artifical data
 
 some places to look for data:
-	- popular data repositories (i think kinda like email logs or even github, just overall a lot of data of stuff)
+	- popular data repositories (i think kinda like email logs or even github, 
+	  just overall a lot of data of stuff)
 		-- UC Irvine Machhine Learning Repository (http://archive.ics.uci.edu/ml/)
 		-- Kaggle datasets (https://www.kaggle.com/datasets)
 		-- Amazons AWS datasets (https://registry.opendata.aws/)
@@ -34,7 +38,8 @@ For this chapters example for a mach ML in real estate-
 be using California Housing Prices dataset from StatLib repository.
 
 this set is based on 1990 cally census (not really that recent).
-also a categorial attribute was added and a few features were removed for teaching purpuse (might not be able to replecate exactly)
+also a categorial attribute was added and a few features were removed for teaching 
+purpuse (might not be able to replecate exactly).
 
 LOOK AT THE BIG PICTURE - pg(35)
 task:
