@@ -1,2 +1,10 @@
-...
+__4/27/19__
+
+# page 7
+
+Types of learning methods:
+	.with or without human supervision ( supervised, unsupervised, 		 semisupervised, and reinforcement learning )
+	.whether it can learn incrementally on the fly ( online - versus - 	 batch learning )
+	.whether they work by comparing new data points to known or detect 	 patterns in training data and building 
+	 a predictive model ( instance based learning - versus - model based 	 learning )
 classify amount and type of supervision get during training:
