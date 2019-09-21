@@ -1,10 +1,49 @@
-__4/27/19__
+WHY USE
+(just kinda skimmed this stuff)
+to automate and predict mainly
+bunch of other reasons but if it is slow and ineffective research best methods
 
-# page 7
+TYPES OF MACHINE LEARNING SYSTEMS - pg(7)
 
 Types of learning methods:
-	.with or without human supervision ( supervised, unsupervised, 		 semisupervised, and reinforcement learning )
-	.whether it can learn incrementally on the fly ( online - versus - 	 batch learning )
-	.whether they work by comparing new data points to known or detect 	 patterns in training data and building 
-	 a predictive model ( instance based learning - versus - model based 	 learning )
-classify amount and type of supervision get during training:
+	- with or without human supervision ( supervised, unsupervised, semisupervised, and reinforcement learning )
+	- whether it can learn incrementally or on the fly ( online vs batch learning )
+	- whether they work by comparing new data points to known or detect patterns in training data and building 
+	  a predictive model ( instance based learning vs model based learning )
+
+SUPERVISED/UNSUPERVISED LEARNING - pg(8)
+classified accourding at amount an type of supervision, there are 4 major catagories:
+	supervised
+	unsupervised
+	semisupervised
+	reinforcement learning 
+
+_SUPERVISED LEARNING - pg(8)
+in this type of learning, the training data fed to algorithm includes desired solutions.
+these solutions are also known as, labels.
+
+a task is classification:
+this means it is trained with instances of example data that are know to be either good or bad
+and from using this it will classify what makes good and bad and then classigy a new instance.
+
+another task is to predict a target (numeric possible):
+this uses features of data (for instance a car has milage, age, year) called predicators.
+it is then fed the data of labels (for instance a cars price) and all predicators and creates a 
+regression model(graph showing where predicators of that similarity would see as a value (label)) to predict 
+what a new instance would be value wise (a cars price).
+
+some regression algorithms can be used for classification and vice versa:
+like with the logistic regression, it can output a value (label) that corresponds with probability
+to belonging to a certain class (20% of a certain class). this just means that while regression can be just a 
+value and classification can be just a class, you can use a value to classify it and a classification to value it.
+
+important supervised learning algorithms:
+	- k-Nearest neighbors
+	- linear regression
+	- logistic regression
+	- support vector machines (SVMs)
+	- decision trees and random forests
+	- neural networks (some can be unsupervised ad semisupervised)
+
+UNSUPERVISED LEARNING - pg(10)
+training without labels, learn without a teacher
