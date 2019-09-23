@@ -47,3 +47,123 @@ important supervised learning algorithms:
 
 UNSUPERVISED LEARNING - pg(10)
 training without labels, learn without a teacher
+
+important unsupervised algorithms:
+	- clustering
+		_ k-means
+		_ hierarchical cluster analysis (HCA)
+		_ expectation maximization
+	- visualization and dimensionality reduction
+		_ principal component analysis (PCA)
+		_ kernal PCA
+		_ locally-linear embedding (LLE)
+		_ t-distrubuted stochastic neigbor embedding (t-SNE)
+	- asociation rule learning
+		_ apriori
+		_ eclat
+
+clustering:
+when a lot of data wants to classified into groups based on similar data.
+classification wouldn't work because dont know the similarities to make the groups.
+this could be like a blog site, you wound create a clustering algoritm to detect
+similar groups of visitors, it would find maybe some like a certain thing and read
+at certain times while others like other things and read at other times.
+you could get even more in depth and with hierarchical clustering which would 
+subdivide these groups to even more similar/smaller groups.
+
+imagine this as a graph model.
+it divides the entire graph into sections/groups and places each user acccording
+to their feartures (attribute with value) landing them into a certain group, similar users.
+the sections would also change to accomadate.
+
+visualization:
+take a lot of data and have an output of a 2d or 3d model of the plotted data points.
+takes each data point and creates clusters in a visual space of where it would fall
+due to its features, this then allows the user to see patterns by seeing things fall
+near each other due to certian similarities.
+tries to keep clusters from overlapping.
+
+imagine (i think) this as a plane of data points that begin forming clusters on their
+own due to similaries and other clusters form likewise with either sharing visual space
+showing similarity.
+on the example cluster the animals and vehicles are well separated, but when the visualization forms
+similar patterns are shown with horses far away from birds but cats and dogs share a very close 
+space to each other.
+it can also be noticed that data points of everything do seem to be spread out a lot, 
+i am guessing this is to due with visualization algoritm.
+............COME BACK TO THIS............
+
+dimensionality reduction:
+simplify data without losing too much information.
+this can be easily pulled off by combining two or more very similar features into
+one and treating it as overall that feature.
+
+imagine it as a car with two features of milage and age.
+you could treat this as both have a direct relationship and see
+them as overall wear and tear, this is called (feature extraction).
+
+some cases its best to reduce the dimenions before feeding data to algorthim
+because it will run faster, take up less space, and sometimes even perform better.
+but this at a lose of some exact calculations and direct perspective
+
+anomaly detection:
+the system is pre trained with noraml instances and can now tell if a new instance
+falls within the normal instances or whether it is an anomally.
+
+imagine a credit card company training your transaction data with a graph model of 
+all your transactions features/points and then compares each new instance to determine if it
+falls within your normal transaction behavior. 
+this can detect fraud with anomallies, or strenghten your transaction model to help protect 
+yourself even more for the determination of an anomally.
+
+could help remove outliers before feeding to algorithm to overall improve performance of it.
+
+association rule learning:
+dig into a lot of data and find certain relations betweens points based on their features.
+
+imagine this as a supermarket digging in to their sale logs and finding a relationship 
+between those who buy barbecue sauce and potato chips also tend to buy steak.
+dug into logs, found those are all bought in relation to one other (one bought, others will be).
+
+SEMISUPERVISED LEARNING - pg(13)
+some labeled data, a lot of unlabeled data
+
+it uses unsupervised learning to determine repeat values and then labels it the then easily 
+classify it the next time the features come up.
+
+imagine this as google photos and every photo you upload it begins labeling each person 
+in them according to how they look, it starts as unsupervised creating clusters of similar 
+featuring people and when it now begins seeing the same person be placed in the same 
+cluster it will create a class of that persons label to next time see where that person falls 
+and classify them as their name.
+while this is perfect, it can still mix things up, so it is best to provide more than a name label
+per person and manually clean up clusters of mistakes of looking alike.
+
+mostly combinations of supervised and unsupervised.
+for example, deep belief networks (DBNs) use unsupervised components called restricted boltzmann 
+machines (RBMs) that stack on one another, which are trained sequentially (in order) in an 
+unsupervised methods (i think like clusters), to which it is then fine tured with supervised 
+to create labels and other desired outcomes
+............COME BACK TO THIS............
+
+REINFORCEMENT LEARNING - pg(13)
+a game of risk and reward with machine.
+the system (called an agent) can see the environment, interact with it, get rewards for doing 
+somethingright, or penalties (negative reward) for doing something wrong.
+this means it must learn on its own the best strategies (called policy), this policy will change 
+accordinglyto the amount of rewards it brings in towards what others do, it then finally iterates 
+over each new policy determining its optimality.
+
+imagine the youtube videos of evolve where the ai learns to play a game on its own by training it 
+for rewarding, for example, not dying and getting far into the game.
+
+BATCH AND ONLINE LEARING - pg (14)
+whether or not they can learn incrementally from a strem of data (or on the fly)
+
+BATCH LEARNING - pg(14)
+
+
+
+
+
+
