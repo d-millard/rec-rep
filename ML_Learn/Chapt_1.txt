@@ -158,7 +158,7 @@ imagine the youtube videos of evolve where the ai learns to play a game on its o
 for rewarding, for example, not dying and getting far into the game.
 
 BATCH AND ONLINE LEARING - pg (14)
-whether or not they can learn incrementally from a strem of data (or on the fly)
+whether or not they can learn incrementally from a strem of data
 
 BATCH LEARNING - pg(14)
 
