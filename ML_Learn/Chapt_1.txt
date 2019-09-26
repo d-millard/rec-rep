@@ -158,12 +158,140 @@ imagine the youtube videos of evolve where the ai learns to play a game on its o
 for rewarding, for example, not dying and getting far into the game.
 
 BATCH AND ONLINE LEARING - pg (14)
-whether or not they can learn incrementally from a strem of data
+whether or not they can learn incrementally from a strem of data 
 
-BATCH LEARNING - pg(14)
+BATCH LEARNING - pg (14)
+incapable of learning incrementally, trained with all data available.
+take a lot of time and computing resources so it is best to do offline, off networks.
+trained, launched (running without learning).
+algorithm runs with the data set and doesn't learn anything new, called offline learning.
+
+if dataset needs to updated with new data, the system must be stopped, trained with new data,
+and repeated for each update of the system/algorithm.
+update system and train new version as often as needed.
+
+is a slow process (hours long) to train with all data at once so it is update only every now
+and then, not great at a constant flow of data (like the stock market prices).
+
+lot of computing power, will cost a lot of money in sytem power and sometimes the datasets
+may be even too large for some computers' IO storage
+
+imagine a system that needs to learn but is off an app on a smartphone, most phones
+have 32gbs of storage which for an advanced dataset would be a fraction so it would be 
+impossible to train the algorithm (but if it could fit and be powered) it would still be 
+unlikely to use app because it would just be taking up resources for phone for hours 
+making it unusable.
+
+better algorithm is online learning.
+
+ONLINE LEARNING - pg (15)
+system trains with data incrementally by taking each data point or small group (called mimi-batches)
+at a time in order given to and learns from it, this is cheap and fast for the system because it 
+takes little datasets at a time and moves on to next to be sent to it.
+
+good for datasets that are a continuos flow (stock prices), anything to learn 
+autonomously (data changes rapid).
+
+it saves resources by once using data to learn, the system can disregard the data and move on to new data.
+can save the data to go to a previous state in the system.
+
+this incremental learning can allow datasets so large they cannot exist on one machine be used to train an
+algorithm by going through the data on any amount of machines and training algoritm, then getting rid of data,
+all until there is now data left (called out-of-core learning).
+
+a feature of incremental learning is how it learns to data (called learning rate). its learning rate can be 
+high meaning it will quickly learn the trends of the new data by quickly forget the data of the old, while 
+a low rate would mean the system won't easily learn the new trends of data and will keep with old data until 
+enough new data is able budge it.
+
+imagine it as stock price, the stock prices it has been trained with are valuable (the old data), though (the 
+new data) is much more valuable short term to predict what will most likely happen next, while the old data 
+can be more valuable as overall observations of the market.
+(not certain if this is best approach).
+
+an issue with this learning technique is the system performance can quickly decline if fed poor data.
+whether this be a sensor, or someone messing with it, it can have negitive results on the 
+performance of the algoritm. 
+best way to counter act this is to monitor system closely and either turn off learning when bad data
+is being fed or go to a previos system state. could possibly monitor input data and deal with any abnormalities
+(for example an anomally detection algorithm).
+
+INSTANCE-BASED VS MODEL-BASED LEARNING - pg (17)
+machine learning algorithms' purpose is to predict, to predict they must generalize (model) the learned data in some
+way to make a new instance off of it. an algorithm is measured on its ability to perform accurate predictions
+of new instances.
+
+two generalizations are instance-based and model-based
+
+INSTANCE-BASED LEARING - pg (17)
+learns what is good or bad by the books (heart) meaning exactly.
+it then takes new instances and generalizes these new instances with a similarity measure to the the other values 
+the algorithm is trying to predict.
+this could be maybe it falls on a graph near other instances trained with and determines if it close to a lot of 
+good or bad instances (going off the features on axis) and whether there is enough close enough to it to push it 
+past a threshold of similarity.
+
+imagine this as spam learning and an algorithm is fed what is and isnt spam, it then takes new instances and compares 
+them with the spam it has learned off, where it then generates a similarity measure (whether it be same words, sentence 
+structure, etc) and if that measure falls above or below a threshold it will be considered spam.
+
+MODEL BASED LEARNING - pg (18)
+usings model (could be graph based) to look for patterns/trends/groupings/etc... to make predictions.
+
+imagine you want to know if money makes people happier, you get a table depicting gdp per capita and life satisfaction
+for each country listed and form a graph, with that graph you start making linear regressions, high positve, high 
+negative, low postive, maybe a few others. then once one of them starts recognizing a trend you find the actual linear 
+equation. this is called (model selection), where you select a linear model (in this case for life satisfaction in 
+terms of gdp per capita).
+the equation is set up the same as a basic algebra one equation of slope:
+y = mx + b
+in this case it is:
+life satisfaction = (average slope increase rate (go to khan academy video to learn more)) * gdp per captia + 
+(y-intercept of life satisfaction (where it starts)).
+
+two types of functions that can be used:
+	- utility function (fitness function):
+	    can be used to test how good function is (don't really know what it is rn)
+	    ............COME BACK TO THIS............
+	- cost function:
+	    used to test how bad a function is, when in linear regression is best to use because it finds the 
+	    distance between training examples and new instances, where the goal is to minimize the distance.
+	    ............COME BACK TO THIS............
+
+linear regression algorithm is fed training examples and gets parameters for equation, y intercept and rate of slope.
+the trained equation parameters being:
+4.85 is y-intercept
+4.91 * 10^-5 is slope rate of change
+life satisfaction = 4.85 + x(4.91 * 10^-5)
+
+now with the equation and its parameters trained, the function can be used to guess what any place with a gdp, for
+example (cypriots with a 22,587 = 5.96 life satisfaction rating).
+
+__example__code__1.1 - pg (21)
+doesnt seem to confusing just what some of the built in functions but everything seems simple.
+though below does refer to k-nearest neigbors algorithm which is an instance based algorithm, where you zoom out and see nearest variables
+which would have gotten the three nearest values and averaged them to get 5.77 (in this example k=3(the amout of nearest neighbors assume))
+this "3-nearest neighbors" algorithm also has some example code (__example__code__1.2 - pg (21, bottom of page))
+
+( theta ) is typically used to represent model parameters.
+
+the process:
+- studied the data
+- seleced a model
+- trained with training data (searched for parameters with a minimize cost function)
+- applied model and made predictions (using program) or also (called inference)
+
+MAIN CHALLENGES OF MACHINE LEARNING - pg (22)
+main task that involves getting an algorithm and train it on data.
+two things that can go wrong are "bad data" and "bad algorithm"
+
+INSUFFICIENT QUANTITY OF TRAINING DATA - pg (22)
 
 
 
 
+
+
+ 
 
 
