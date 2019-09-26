@@ -15,3 +15,4 @@
 - from juptyer to tensorflow
 - stopping python right now because i have java programming and logic II
 - also want to learn for my capstone
+(go through mL and add folders for each chapter)
