@@ -269,9 +269,10 @@ example (cypriots with a 22,587 = 5.96 life satisfaction rating).
 
 __example__code__1.1 - pg (21)
 doesnt seem to confusing just what some of the built in functions but everything seems simple.
-though below does refer to k-nearest neigbors algorithm which is an instance based algorithm, where you zoom out and see nearest variables
-which would have gotten the three nearest values and averaged them to get 5.77 (in this example k=3(the amout of nearest neighbors assume))
-this "3-nearest neighbors" algorithm also has some example code (__example__code__1.2 - pg (21, bottom of page))
+though below does refer to k-nearest neigbors algorithm which is an instance based algorithm, 
+where you zoom out and see nearest variableswhich would have gotten the three nearest values and averaged them to 
+get 5.77 (in this example k=3(the amout of nearest neighbors assume))this "3-nearest neighbors" algorithm also has 
+some example code (__example__code__1.2 - pg (21, bottom of page))
 
 ( theta ) is typically used to represent model parameters.
 
@@ -286,6 +287,22 @@ main task that involves getting an algorithm and train it on data.
 two things that can go wrong are "bad data" and "bad algorithm"
 
 INSUFFICIENT QUANTITY OF TRAINING DATA - pg (22)
+machines aren't great at learning it can take thousand of data to to get a simple problem and even millions for complex.
+children learn after a few times told.
+
+__Unreasonable_Effectiveness_Of_Data__ - pg (23)
+link : https://homl.info/6
+
+talks about how no matter how amazing algorithms get an issue is the data provided to them are ineffective and provide
+little detail requiring the algorithm to go through millions of instances of data to become reliable.
+shows how varios types of machine algorithms performed almost identical meaning the issue lies in the 
+only other variable (the data).
+
+............READ INTO THIS PAPER............
+
+NONREPRESENTATIVE TRAINING DATA - pg (24)
+
+
 
 
 
