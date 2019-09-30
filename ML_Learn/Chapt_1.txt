@@ -301,8 +301,30 @@ only other variable (the data).
 ............READ INTO THIS PAPER............
 
 NONREPRESENTATIVE TRAINING DATA - pg (24)
+to train effectively, data must represent all data to generalize to.
 
+in the country example from earlier, many countries were left out which made for an incorrect model.
+when adding just a few missing countries the linear regression shifts greatly to accomadate for more data to generalize.
 
+data-set needs to be of data going to be generalized, too small and will have (sampling noise) which will train the algorithm
+according the the data it has, which will be nonrepresentative of all generalization
+if the data-set is too big the data can be nonrepresentative if sampling method (training) is flawed and more data creates 
+more of that flaw across the algorithm.
+
+cannot be biased, must represent all data high and low.
+
+_A_Famous_Example_of_Sampling_Bias_ - pg (24)
+in the election of landon vs roosevelt.
+the literary digest predicted landon would win with 57% while it was roosevelt with 62%
+
+the literary digest sent out letters to addresses gotten through services that the wealtier used, who favored the republicans
+less than 25% responed meaning only those who cared about politics responded, (nonreponse bias).
+
+another example could be an algorithm that detects funk music by searching funk music on youtube.
+depending on where you live it could return different types of music, for example in brazil it will return a lot of "funk carioca"
+which would not sound like the same "funk" in the US.
+
+POOR-QUALITY DATA - pg (25)
 
 
 
