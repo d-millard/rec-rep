@@ -286,6 +286,8 @@ MAIN CHALLENGES OF MACHINE LEARNING - pg (22)
 main task that involves getting an algorithm and train it on data.
 two things that can go wrong are "bad data" and "bad algorithm"
 
+BAD DATA
+
 INSUFFICIENT QUANTITY OF TRAINING DATA - pg (22)
 machines aren't great at learning it can take thousand of data to to get a simple problem and even millions for complex.
 children learn after a few times told.
@@ -325,8 +327,119 @@ depending on where you live it could return different types of music, for exampl
 which would not sound like the same "funk" in the US.
 
 POOR-QUALITY DATA - pg (25)
+if data is poor, clouded with noise, outliers, and errors it will make it harder for machine to get real pattern.
+generalize the correct data to get accurate predictions.
 
+best to clean up data before training.
 
+imagine getting rid of outliers completely.
+also imagine a system where 5% of people don't specify their age so you either allow the machine to ignore that feature altogether or
+replace any missing ages with the median or one model with the feature and one without.
+
+IRRELEVANT FEATURES - pg (25)
+need enough relevant features for machine to train right.
+irrelevant features means an irrelevant prediction.
+
+need to come up with relevant features to train with (feature engineering).
+feature engineering:
+  - getting best features to use/train with (feature selection)
+  - using features to create new more useful features, dimensionality reduction (feature extraction)
+  - getting new features from new data
+
+BAD ALGORITHM
+
+OVERFITTING THE TRAINING DATA - pg (26)
+machine performs well on training data but cannot make good predictions.
+this is a problem of overgeneralization.
+
+imagine over generalization as a taxi driver ripping you off and you now saying all are theives.
+imagine a model of life satisfaction but with a polynomial function that can create a more accurate look of the points flow, though in the 
+absence of points it overgeneralizes too much and goes to zero thinking there must be zero because the graph gives it nothing to follow.
+
+some deep neural networks detect subtle patterns, if data is noisy it will detect patterns in the noise itself.
+in a life satisfaction example if names were fed it could find that countries with a w in their name have a life satisfaction > 7.
+while this happened by chance it is unlikely that this w-rule would hold up across everything, rwanda or zimbabwe.
+
+overfitting occurs when model is too complex and data is a low amount and/or noisy.
+possible solutions:
+  - simplify model, maybe add less featurs/parameters
+  - get more training data
+  - reduce noise, remove outliers (anomally detection) and fix data errors
+
+making a model simpler and have a reduced risk of overfitting is (regularization)
+
+for example in the previous life satisfaction model there were two (degrees of freedom).
+0^0 = y (life satisfaction) and 0^1 which was the x point times the rate/slope.
+if x is set to 0 the entire time it would only be able to move the y axis to the mean by only being able to generalize all data to that one 
+point, in that case it would still be its y intercept.
+though since it can modify the x it allows it to move and create a line generalizing all the data.
+if force the algorithm to keep small, maybe by removing outlier, then it will be less complex than the 2 degree but not as simple as 1 degree.
+
+find balance between simple enough to generalize data and fitting data.
+
+imagine the life satisfaction model being trained with a regularization constraint that would allow it to have a smaller slope that will 
+be better at generalizing new instances, this could be removing some outliers.
+
+amount of regularization can be controlled with a (hyper-parameter).
+parameter of learning algorithm, not model itself.
+it will determine how much to regularize an algorithm.
+constant during training.
+
+big value and it will be over regularized, almost like a flat line.
+small value and it will be under regularized, overfitted data.
+
+tuning this feature is import as it will allow quick and easy generalization.
+
+UNDERFITTING THE TRAINING DATA - pg (28)
+algorithm is too simple to reliably prediction the data.
+
+for example life is just too complicated to have all life satisfaction be rated by a linear model.
+
+possible solutions:
+  - more powerful model with more parameters
+  - feeding better features, more detailed and useful (feature engineering)
+  - reducing contrainsts of model the (hyperparameter) coefficient
+
+STEPPING BACK - pg (28)
+  - machines get better by learning from data
+  - different types of ML systems
+  - model based gets parameters to fit to model while instance learns from the other data by heart
+  - poor performence if system set is small, or nonrepresentative (does not represent all data), or nosiy, or has irrelevaent features. 
+    model cant be too simple to underfit and over generalize the data but cant be too complex to overfit data.
+
+TESTING AND VALIDATING - pg (29)
+split data set into a training set and testing set.
+
+the error rate on new instances is called the (generalization error) or known as (out-of-sample error).
+this error vale determines how well the model will do in prediction new instances.
+
+if the training data error is low by the generalization error is high the model is being overfitted.
+
+common to use 80% on training data, and 20% on testing data.
+
+separate set called (validation set).
+when the model is trained on testing set and a hyperparameter is proved to be best, 
+run one final test on the (validation) set with the model chosen.
+
+(cross-validation), training set is split into complementary subsets, each model is trained agaisnt a different combination of these subsets 
+(subsets abc - AB, AC, BC...), then validated (trained) against remaining parts, once a model type and hyperparameters have been chosen (the best),
+the final model is trained on full training set and the generalized error is measured on the test set.
+
+_No_Free_Lunch_Theorem_ - pg (30)
+https://homl.info/8
+
+assumptions are created to simply data so there is no need to generalize data that make good generaliztions for new instances.
+a linear model for example assumes the data is in a linear format.
+
+if no assumptions are made about data there is no reason to prefer an algorithm over another.
+
+in many cases an assumption should be made like in simple problem a linear model with varying levels of regularization, while
+in many large problems many varying neural networks should be evaluated.
+
+END OF NOTES
+
+exercises - pg (31)
+testing pandas out on "panda_testing.py"
 
 
 
