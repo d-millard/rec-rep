@@ -1,0 +1,450 @@
+WHY USE
+(just kinda skimmed this stuff)
+to automate and predict mainly
+bunch of other reasons but if it is slow and ineffective research best methods
+
+TYPES OF MACHINE LEARNING SYSTEMS - pg(7)
+
+Types of learning methods:
+	- with or without human supervision ( supervised, unsupervised, semisupervised, and reinforcement learning )
+	- whether it can learn incrementally or on the fly ( online vs batch learning )
+	- whether they work by comparing new data points to known or detect patterns in training data and building 
+	  a predictive model ( instance based learning vs model based learning )
+
+SUPERVISED/UNSUPERVISED LEARNING - pg(8)
+classified accourding at amount an type of supervision, there are 4 major catagories:
+	supervised
+	unsupervised
+	semisupervised
+	reinforcement learning 
+
+SUPERVISED LEARNING - pg(8)
+in this type of learning, the training data fed to algorithm includes desired solutions.
+these solutions are also known as, labels.
+
+a task is classification:
+this means it is trained with instances of example data that are know to be either good or bad
+and from using this it will classify what makes good and bad and then classigy a new instance.
+
+another task is to predict a target (numeric possible):
+this uses features of data (for instance a car has milage, age, year) called predicators.
+it is then fed the data of labels (for instance a cars price) and all predicators and creates a 
+regression model(graph showing where predicators of that similarity would see as a value (label)) to predict 
+what a new instance would be value wise (a cars price).
+
+some regression algorithms can be used for classification and vice versa:
+like with the logistic regression, it can output a value (label) that corresponds with probability
+to belonging to a certain class (20% of a certain class). this just means that while regression can be just a 
+value and classification can be just a class, you can use a value to classify it and a classification to value it.
+
+important supervised learning algorithms:
+	- k-Nearest neighbors
+	- linear regression
+	- logistic regression
+	- support vector machines (SVMs)
+	- decision trees and random forests
+	- neural networks (some can be unsupervised ad semisupervised)
+
+UNSUPERVISED LEARNING - pg(10)
+training without labels, learn without a teacher
+
+important unsupervised algorithms:
+	- clustering
+		_ k-means
+		_ hierarchical cluster analysis (HCA)
+		_ expectation maximization
+	- visualization and dimensionality reduction
+		_ principal component analysis (PCA)
+		_ kernal PCA
+		_ locally-linear embedding (LLE)
+		_ t-distrubuted stochastic neigbor embedding (t-SNE)
+	- asociation rule learning
+		_ apriori
+		_ eclat
+
+clustering:
+when a lot of data wants to classified into groups based on similar data.
+classification wouldn't work because dont know the similarities to make the groups.
+this could be like a blog site, you wound create a clustering algoritm to detect
+similar groups of visitors, it would find maybe some like a certain thing and read
+at certain times while others like other things and read at other times.
+you could get even more in depth and with hierarchical clustering which would 
+subdivide these groups to even more similar/smaller groups.
+
+imagine this as a graph model.
+it divides the entire graph into sections/groups and places each user acccording
+to their feartures (attribute with value) landing them into a certain group, similar users.
+the sections would also change to accomadate.
+
+visualization:
+take a lot of data and have an output of a 2d or 3d model of the plotted data points.
+takes each data point and creates clusters in a visual space of where it would fall
+due to its features, this then allows the user to see patterns by seeing things fall
+near each other due to certian similarities.
+tries to keep clusters from overlapping.
+
+imagine (i think) this as a plane of data points that begin forming clusters on their
+own due to similaries and other clusters form likewise with either sharing visual space
+showing similarity.
+on the example cluster the animals and vehicles are well separated, but when the visualization forms
+similar patterns are shown with horses far away from birds but cats and dogs share a very close 
+space to each other.
+it can also be noticed that data points of everything do seem to be spread out a lot, 
+i am guessing this is to due with visualization algoritm.
+............COME BACK TO THIS............
+
+dimensionality reduction:
+simplify data without losing too much information.
+this can be easily pulled off by combining two or more very similar features into
+one and treating it as overall that feature.
+
+imagine it as a car with two features of milage and age.
+you could treat this as both have a direct relationship and see
+them as overall wear and tear, this is called (feature extraction).
+
+some cases its best to reduce the dimenions before feeding data to algorthim
+because it will run faster, take up less space, and sometimes even perform better.
+but this at a lose of some exact calculations and direct perspective
+
+anomaly detection:
+the system is pre trained with noraml instances and can now tell if a new instance
+falls within the normal instances or whether it is an anomally.
+
+imagine a credit card company training your transaction data with a graph model of 
+all your transactions features/points and then compares each new instance to determine if it
+falls within your normal transaction behavior. 
+this can detect fraud with anomallies, or strenghten your transaction model to help protect 
+yourself even more for the determination of an anomally.
+
+could help remove outliers before feeding to algorithm to overall improve performance of it.
+
+association rule learning:
+dig into a lot of data and find certain relations betweens points based on their features.
+
+imagine this as a supermarket digging in to their sale logs and finding a relationship 
+between those who buy barbecue sauce and potato chips also tend to buy steak.
+dug into logs, found those are all bought in relation to one other (one bought, others will be).
+
+SEMISUPERVISED LEARNING - pg(13)
+some labeled data, a lot of unlabeled data
+
+it uses unsupervised learning to determine repeat values and then labels it the then easily 
+classify it the next time the features come up.
+
+imagine this as google photos and every photo you upload it begins labeling each person 
+in them according to how they look, it starts as unsupervised creating clusters of similar 
+featuring people and when it now begins seeing the same person be placed in the same 
+cluster it will create a class of that persons label to next time see where that person falls 
+and classify them as their name.
+while this is perfect, it can still mix things up, so it is best to provide more than a name label
+per person and manually clean up clusters of mistakes of looking alike.
+
+mostly combinations of supervised and unsupervised.
+for example, deep belief networks (DBNs) use unsupervised components called restricted boltzmann 
+machines (RBMs) that stack on one another, which are trained sequentially (in order) in an 
+unsupervised methods (i think like clusters), to which it is then fine tured with supervised 
+to create labels and other desired outcomes
+............COME BACK TO THIS............
+
+REINFORCEMENT LEARNING - pg(13)
+a game of risk and reward with machine.
+the system (called an agent) can see the environment, interact with it, get rewards for doing 
+somethingright, or penalties (negative reward) for doing something wrong.
+this means it must learn on its own the best strategies (called policy), this policy will change 
+accordinglyto the amount of rewards it brings in towards what others do, it then finally iterates 
+over each new policy determining its optimality.
+
+imagine the youtube videos of evolve where the ai learns to play a game on its own by training it 
+for rewarding, for example, not dying and getting far into the game.
+
+BATCH AND ONLINE LEARING - pg (14)
+whether or not they can learn incrementally from a strem of data 
+
+BATCH LEARNING - pg (14)
+incapable of learning incrementally, trained with all data available.
+take a lot of time and computing resources so it is best to do offline, off networks.
+trained, launched (running without learning).
+algorithm runs with the data set and doesn't learn anything new, called offline learning.
+
+if dataset needs to updated with new data, the system must be stopped, trained with new data,
+and repeated for each update of the system/algorithm.
+update system and train new version as often as needed.
+
+is a slow process (hours long) to train with all data at once so it is update only every now
+and then, not great at a constant flow of data (like the stock market prices).
+
+lot of computing power, will cost a lot of money in sytem power and sometimes the datasets
+may be even too large for some computers' IO storage
+
+imagine a system that needs to learn but is off an app on a smartphone, most phones
+have 32gbs of storage which for an advanced dataset would be a fraction so it would be 
+impossible to train the algorithm (but if it could fit and be powered) it would still be 
+unlikely to use app because it would just be taking up resources for phone for hours 
+making it unusable.
+
+better algorithm is online learning.
+
+ONLINE LEARNING - pg (15)
+system trains with data incrementally by taking each data point or small group (called mimi-batches)
+at a time in order given to and learns from it, this is cheap and fast for the system because it 
+takes little datasets at a time and moves on to next to be sent to it.
+
+good for datasets that are a continuos flow (stock prices), anything to learn 
+autonomously (data changes rapid).
+
+it saves resources by once using data to learn, the system can disregard the data and move on to new data.
+can save the data to go to a previous state in the system.
+
+this incremental learning can allow datasets so large they cannot exist on one machine be used to train an
+algorithm by going through the data on any amount of machines and training algoritm, then getting rid of data,
+all until there is now data left (called out-of-core learning).
+
+a feature of incremental learning is how it learns to data (called learning rate). its learning rate can be 
+high meaning it will quickly learn the trends of the new data by quickly forget the data of the old, while 
+a low rate would mean the system won't easily learn the new trends of data and will keep with old data until 
+enough new data is able budge it.
+
+imagine it as stock price, the stock prices it has been trained with are valuable (the old data), though (the 
+new data) is much more valuable short term to predict what will most likely happen next, while the old data 
+can be more valuable as overall observations of the market.
+(not certain if this is best approach).
+
+an issue with this learning technique is the system performance can quickly decline if fed poor data.
+whether this be a sensor, or someone messing with it, it can have negitive results on the 
+performance of the algoritm. 
+best way to counter act this is to monitor system closely and either turn off learning when bad data
+is being fed or go to a previos system state. could possibly monitor input data and deal with any abnormalities
+(for example an anomally detection algorithm).
+
+INSTANCE-BASED VS MODEL-BASED LEARNING - pg (17)
+machine learning algorithms' purpose is to predict, to predict they must generalize (model) the learned data in some
+way to make a new instance off of it. an algorithm is measured on its ability to perform accurate predictions
+of new instances.
+
+two generalizations are instance-based and model-based
+
+INSTANCE-BASED LEARING - pg (17)
+learns what is good or bad by the books (heart) meaning exactly.
+it then takes new instances and generalizes these new instances with a similarity measure to the the other values 
+the algorithm is trying to predict.
+this could be maybe it falls on a graph near other instances trained with and determines if it close to a lot of 
+good or bad instances (going off the features on axis) and whether there is enough close enough to it to push it 
+past a threshold of similarity.
+
+imagine this as spam learning and an algorithm is fed what is and isnt spam, it then takes new instances and compares 
+them with the spam it has learned off, where it then generates a similarity measure (whether it be same words, sentence 
+structure, etc) and if that measure falls above or below a threshold it will be considered spam.
+
+MODEL BASED LEARNING - pg (18)
+usings model (could be graph based) to look for patterns/trends/groupings/etc... to make predictions.
+
+imagine you want to know if money makes people happier, you get a table depicting gdp per capita and life satisfaction
+for each country listed and form a graph, with that graph you start making linear regressions, high positve, high 
+negative, low postive, maybe a few others. then once one of them starts recognizing a trend you find the actual linear 
+equation. this is called (model selection), where you select a linear model (in this case for life satisfaction in 
+terms of gdp per capita).
+the equation is set up the same as a basic algebra one equation of slope:
+y = mx + b
+in this case it is:
+life satisfaction = (average slope increase rate (go to khan academy video to learn more)) * gdp per captia + 
+(y-intercept of life satisfaction (where it starts)).
+
+two types of functions that can be used:
+	- utility function (fitness function):
+	    can be used to test how good function is (don't really know what it is rn)
+	    ............COME BACK TO THIS............
+	- cost function:
+	    used to test how bad a function is, when in linear regression is best to use because it finds the 
+	    distance between training examples and new instances, where the goal is to minimize the distance.
+	    ............COME BACK TO THIS............
+
+linear regression algorithm is fed training examples and gets parameters for equation, y intercept and rate of slope.
+the trained equation parameters being:
+4.85 is y-intercept
+4.91 * 10^-5 is slope rate of change
+life satisfaction = 4.85 + x(4.91 * 10^-5)
+
+now with the equation and its parameters trained, the function can be used to guess what any place with a gdp, for
+example (cypriots with a 22,587 = 5.96 life satisfaction rating).
+
+__example__code__1.1 - pg (21)
+doesnt seem to confusing just what some of the built in functions but everything seems simple.
+though below does refer to k-nearest neigbors algorithm which is an instance based algorithm, 
+where you zoom out and see nearest variableswhich would have gotten the three nearest values and averaged them to 
+get 5.77 (in this example k=3(the amout of nearest neighbors assume))this "3-nearest neighbors" algorithm also has 
+some example code (__example__code__1.2 - pg (21, bottom of page))
+
+( theta ) is typically used to represent model parameters.
+
+the process:
+- studied the data
+- seleced a model
+- trained with training data (searched for parameters with a minimize cost function)
+- applied model and made predictions (using program) or also (called inference)
+
+MAIN CHALLENGES OF MACHINE LEARNING - pg (22)
+main task that involves getting an algorithm and train it on data.
+two things that can go wrong are "bad data" and "bad algorithm"
+
+BAD DATA
+
+INSUFFICIENT QUANTITY OF TRAINING DATA - pg (22)
+machines aren't great at learning it can take thousand of data to to get a simple problem and even millions for complex.
+children learn after a few times told.
+
+__Unreasonable_Effectiveness_Of_Data__ - pg (23)
+link : https://homl.info/6
+
+talks about how no matter how amazing algorithms get an issue is the data provided to them are ineffective and provide
+little detail requiring the algorithm to go through millions of instances of data to become reliable.
+shows how varios types of machine algorithms performed almost identical meaning the issue lies in the 
+only other variable (the data).
+
+............READ INTO THIS PAPER............
+
+NONREPRESENTATIVE TRAINING DATA - pg (24)
+to train effectively, data must represent all data to generalize to.
+
+in the country example from earlier, many countries were left out which made for an incorrect model.
+when adding just a few missing countries the linear regression shifts greatly to accomadate for more data to generalize.
+
+data-set needs to be of data going to be generalized, too small and will have (sampling noise) which will train the algorithm
+according the the data it has, which will be nonrepresentative of all generalization
+if the data-set is too big the data can be nonrepresentative if sampling method (training) is flawed and more data creates 
+more of that flaw across the algorithm.
+
+cannot be biased, must represent all data high and low.
+
+_A_Famous_Example_of_Sampling_Bias_ - pg (24)
+in the election of landon vs roosevelt.
+the literary digest predicted landon would win with 57% while it was roosevelt with 62%
+
+the literary digest sent out letters to addresses gotten through services that the wealtier used, who favored the republicans
+less than 25% responed meaning only those who cared about politics responded, (nonreponse bias).
+
+another example could be an algorithm that detects funk music by searching funk music on youtube.
+depending on where you live it could return different types of music, for example in brazil it will return a lot of "funk carioca"
+which would not sound like the same "funk" in the US.
+
+POOR-QUALITY DATA - pg (25)
+if data is poor, clouded with noise, outliers, and errors it will make it harder for machine to get real pattern.
+generalize the correct data to get accurate predictions.
+
+best to clean up data before training.
+
+imagine getting rid of outliers completely.
+also imagine a system where 5% of people don't specify their age so you either allow the machine to ignore that feature altogether or
+replace any missing ages with the median or one model with the feature and one without.
+
+IRRELEVANT FEATURES - pg (25)
+need enough relevant features for machine to train right.
+irrelevant features means an irrelevant prediction.
+
+need to come up with relevant features to train with (feature engineering).
+feature engineering:
+  - getting best features to use/train with (feature selection)
+  - using features to create new more useful features, dimensionality reduction (feature extraction)
+  - getting new features from new data
+
+BAD ALGORITHM
+
+OVERFITTING THE TRAINING DATA - pg (26)
+machine performs well on training data but cannot make good predictions.
+this is a problem of overgeneralization.
+
+imagine over generalization as a taxi driver ripping you off and you now saying all are theives.
+imagine a model of life satisfaction but with a polynomial function that can create a more accurate look of the points flow, though in the 
+absence of points it overgeneralizes too much and goes to zero thinking there must be zero because the graph gives it nothing to follow.
+
+some deep neural networks detect subtle patterns, if data is noisy it will detect patterns in the noise itself.
+in a life satisfaction example if names were fed it could find that countries with a w in their name have a life satisfaction > 7.
+while this happened by chance it is unlikely that this w-rule would hold up across everything, rwanda or zimbabwe.
+
+overfitting occurs when model is too complex and data is a low amount and/or noisy.
+possible solutions:
+  - simplify model, maybe add less featurs/parameters
+  - get more training data
+  - reduce noise, remove outliers (anomally detection) and fix data errors
+
+making a model simpler and have a reduced risk of overfitting is (regularization)
+
+for example in the previous life satisfaction model there were two (degrees of freedom).
+0^0 = y (life satisfaction) and 0^1 which was the x point times the rate/slope.
+if x is set to 0 the entire time it would only be able to move the y axis to the mean by only being able to generalize all data to that one 
+point, in that case it would still be its y intercept.
+though since it can modify the x it allows it to move and create a line generalizing all the data.
+if force the algorithm to keep small, maybe by removing outlier, then it will be less complex than the 2 degree but not as simple as 1 degree.
+
+find balance between simple enough to generalize data and fitting data.
+
+imagine the life satisfaction model being trained with a regularization constraint that would allow it to have a smaller slope that will 
+be better at generalizing new instances, this could be removing some outliers.
+
+amount of regularization can be controlled with a (hyper-parameter).
+parameter of learning algorithm, not model itself.
+it will determine how much to regularize an algorithm.
+constant during training.
+
+big value and it will be over regularized, almost like a flat line.
+small value and it will be under regularized, overfitted data.
+
+tuning this feature is import as it will allow quick and easy generalization.
+
+UNDERFITTING THE TRAINING DATA - pg (28)
+algorithm is too simple to reliably prediction the data.
+
+for example life is just too complicated to have all life satisfaction be rated by a linear model.
+
+possible solutions:
+  - more powerful model with more parameters
+  - feeding better features, more detailed and useful (feature engineering)
+  - reducing contrainsts of model the (hyperparameter) coefficient
+
+STEPPING BACK - pg (28)
+  - machines get better by learning from data
+  - different types of ML systems
+  - model based gets parameters to fit to model while instance learns from the other data by heart
+  - poor performence if system set is small, or nonrepresentative (does not represent all data), or nosiy, or has irrelevaent features. 
+    model cant be too simple to underfit and over generalize the data but cant be too complex to overfit data.
+
+TESTING AND VALIDATING - pg (29)
+split data set into a training set and testing set.
+
+the error rate on new instances is called the (generalization error) or known as (out-of-sample error).
+this error vale determines how well the model will do in prediction new instances.
+
+if the training data error is low by the generalization error is high the model is being overfitted.
+
+common to use 80% on training data, and 20% on testing data.
+
+separate set called (validation set).
+when the model is trained on testing set and a hyperparameter is proved to be best, 
+run one final test on the (validation) set with the model chosen.
+
+(cross-validation), training set is split into complementary subsets, each model is trained agaisnt a different combination of these subsets 
+(subsets abc - AB, AC, BC...), then validated (trained) against remaining parts, once a model type and hyperparameters have been chosen (the best),
+the final model is trained on full training set and the generalized error is measured on the test set.
+
+_No_Free_Lunch_Theorem_ - pg (30)
+https://homl.info/8
+
+assumptions are created to simply data so there is no need to generalize data that make good generaliztions for new instances.
+a linear model for example assumes the data is in a linear format.
+
+if no assumptions are made about data there is no reason to prefer an algorithm over another.
+
+in many cases an assumption should be made like in simple problem a linear model with varying levels of regularization, while
+in many large problems many varying neural networks should be evaluated.
+
+END OF NOTES
+
+exercises - pg (31)
+doing some research on documentation of the life_satisfaction example
+testing pandas out on "panda_testing.py"
+
+
+
+
+ 
+
+
