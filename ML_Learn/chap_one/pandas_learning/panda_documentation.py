@@ -324,8 +324,143 @@ df.loc[df[<column name>] == '<attribute to test for 1>', '<value to output for t
 # TESTING
 # will do testing, look back at all stuff and do something
 # look at previous testing section
+"""
+# testing_one.py
+this gets the data as csv and prints out a simple statement for each piece of artwork
+"""
+"""
+# testing_two.py
+this gets the data in the json files and uses a recursive function to get all the data from the subject
+category, the children and other none nested things.
+stores all its subjects (details about painting) as key-value pairs to their detail id and name of detail in a dict.
+some no subjects or ids and stop it reaches a certain statement.
+huge amount of data gotten and saved.
+"""
 
 # OPERATIONS ON GROUPS
+"""
+showing why to use this api in cases
+iterate groups, group things based on column values (like a lot of things have similar width and such)
+built in methods to increase work flow
+"""
+
+# MOTIVATION
+"""
+apparently no explanation, just get it from examples
+(kinda should be the other way around)
+"""
+# aggregation
+"""
+if wanted to find the firs acquired artwork, would use .min() function on acquisitionYear column
+though if wanted to find the first of every artist would need to use grouping
+
+you would need to split the data by each unique artist, grouping together all data with the same 
+artist, (including acquisitionYear)
+group data by a certain value and return 1 value for each group is called (aggregation)
+AGGREGATION
+family of operations (research some)
+"""
+# transformation
+"""
+if was going though data on artists artwork and some data was missing (medium for example)
+we could just replace this missing data with a flag it is missing.
+though another way to fill this missing value is to group together a certain data value (artist name)
+and find the most common piece of data in this column to fill it in with (most common medium he used)
+
+TRANSFORMATION
+take the dataFrame, split into groups based on certain data value, then perform some computation on data
+and return a group/dataFrame that is the same size with data changed based on those computations
+"""
+# filtering
+"""
+in the artwork dataFrame there are some titles that repeat, group all titles together and just look
+at data where only groups are more than 1 long (some have repeating titles)
+then to look specifically to the rows where there are more than 1 row of data, drop the rest of the 
+groups that don't follow this format of more than 1
+
+FILTERING
+getting specific data from the frame and getting rid of the rest that aren't that data
+"""
+
+# ITERATING OVER GROUPS
+"""
+to organize data into groups based on single column value
+use the .groupby('<column name>') method
+call the pandas dataFrame and call the method .groupby('<column name>') on it to organize it by that column name
+this method returns the data on the groups and what each was organized by
+can get each group organized into as well as the data in dataFrame
+returns a tuple of what the grouped value was and its good
+can be used in a for loop (returns subsets of dataFrame) as example:
+for name, group in df.groupby('artist'):
+name ==== the name of the artist the group is grouped by
+group ==== the data of the group, all other data including artist names
+"""
+# demo for aggregation
+# go over all artist groups (grouped by name)
+# get the date for each first acquisition
+# fill in some missing values
+# groups_demo.py
+"""A LESSON LEARNED IS LOOK UP SPECIFIC STUFF ON PANDAS TO SEE IF THERE ARE ANY METHODS FOR IT"""
+
+# BUILT-IN METHODS
+# saw in groups_demo.py that using for loops with groups, the data could be analyzed with transformations in mind
+"""
+in the previous groups_demo.py, to transform data used each group
+analyzed each dataset to alter the missing data
+"""
+# pandas allows the ability to get a grouped dataFrame with specific columns in mind
+# to do this after using the .groupby('<group value>') method specify the columns [<columns value>]
+# syntax:
+# df.groupby('<group value>')['<values to get/columns>']
+# this gets the grouped dataFrame and then gets only the columns requested
+# this is used instead of going through a loop and getting only the 'medium' from each subset
+# working with .transform(<custom transforming function>)
+"""
+this takes a custom transforming function as a parameter
+it returns the return from custom function
+does any transformation and returns the data
+if working with a specific data can return the data back into its place with loc or iloc
+syntax:
+df[:, '<column>'] = df['<column>'].transform('<transforming function>')
+# or
+df = df.transform('<transforming function>')
+"""
+# aggregation built-ins
+# in another case in groups_demo.py found minimum values for each artist
+# use the .agg() method
+# this takes any function that takes input of a series and returns a single value
+# (np.min) is a numpy function that takes a series and returns the minimum
+"""
+syntax:
+ex = df.groupby('<group value>')['<column>'].agg(<function that takes each group series of column and returns a value>)
+"""
+# in pandas, there are some aggregate functions like .min()
+# this will take a dataFrame and go through each aggregation and return a single value for each
+"""
+syntax:
+ex = df.groupby('<group value>')['<column>'].min()
+"""
+# filtering built-ins
+# in the case of looking for duplicate titles
+# the filter requires a condition function (or something that is a condition function)
+# this is quick when using a lambda function
+"""
+syntax:
+condition = lambda <return>: <case>
+ex:
+condition = lambda x: len(x.index) > 1
+"""
+# then use the .filter(<conditional>) to filter the data and return the data that only are true in condition
+"""
+possibly lambda function could be conditional function
+syntax:
+ex = df.filter(<conditional function>)
+"""
+# demo
+# called built_demo.py
+# perform aggregation, transformation and filtering using built in methods
+# will be less complicated code because more will be going on in the background
+# TIMESTAMP - 2:15
 
 
 
