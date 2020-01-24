@@ -12,7 +12,7 @@
 - higher end of beginner and lower end of intermediate
 # ML_Learn
 - goes through machine learning
-- from juptyer to tensorflow
-- stopping python right now because i have java programming and logic II
+- using juptyer from scikit-learn to tensorflow
+- stopping python right now because i have java programming 
 - also want to learn for my capstone
 - GO THROUGH ML AND ADD FOLDERS FOR EACH CHAPTER
