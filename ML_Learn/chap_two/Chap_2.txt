@@ -1,0 +1,180 @@
+END-TO-END - pg(33)
+project end from end
+	- pretend to be a data scientist
+	- (real estate company)
+
+main steps that want to be taken:
+	1. look at the big picture (what is this going to be and how is it going to happen)
+	2. get data (used to train)
+	3. discover and visualize data to gain insights (look at trends, anything a human can see)
+	4. prepare the data for machine learning algorithms (clean up data and optimize algorithm)
+	5. select model and train it (select type of algorthm...(get to this when I finish chap_1))
+	6. fine tune model (optimize it to be effective, efficient, and learn best...
+           (get to this when I finish chap_1))
+	7. present solution (take what the model has learned and make sense of it and present...
+           (get to this when I finish chap_1))
+	8. launch, monitor, and maintain system (make sure it works and keeps working...
+	   (get to this when I finish chap_1))
+
+WORKING WITH REAL DATA - pg(33)
+when learing, its best to use real data not artifical data
+
+some places to look for data:
+	- popular data repositories (i think kinda like email logs or even github, 
+	  just overall a lot of data of stuff)
+		-- UC Irvine Machhine Learning Repository (http://archive.ics.uci.edu/ml/)
+		-- Kaggle datasets (https://www.kaggle.com/datasets)
+		-- Amazons AWS datasets (https://registry.opendata.aws/)
+	- Meta portals (they list open data repositories)
+		-- http://dataportals.org/
+		-- http://opendatamonitor.eu/
+		-- http://quandl.com/
+	- Other pages listing many popular open data repositories
+		-- Wikipedias list of Machine Learning datasets (https://homl.info/9)
+		-- Quora.com question (https://homl.info/10)
+		-- Datasets subreddit (https://www.reddit.com/r/datasets)
+
+For this chapters example for a mach ML in real estate-
+be using California Housing Prices dataset from StatLib repository.
+
+this set is based on 1990 cally census (not really that recent).
+also a categorial attribute was added and a few features were removed for teaching 
+purpuse (might not be able to replecate exactly).
+
+LOOK AT THE BIG PICTURE - pg(35)
+task:
+	- build a model of housing prices in california using (census)
+	- for each block group in cally (smallest geographical unit), just call "districts"
+	- predict housing price in any district
+
+Use the machine learning checklist in APPENDIX B, make sure to adapt it to needs
+
+FRAME THE PROBLEM - pg(35)
+what is the buisness objective...
+...a model is probably not the end goal..
+..how do they expect to use the model
+these uses will frame the probelm of algorithms, performance measures, and tweaking time and effort
+
+the model output (a prediction of the district medium housing price) will feed to another ML system
+the next system will determine whether it is worth investing in a district or not
+this is important because it determines revenue
+
+	PIPELINES - pg (36)
+	works similar to the python generator piplines, data feeds down the chain going through systems.
+	sequence of data processing (components) is (called a data pipline) - 
+	- these are common because (same with all generator use cases) - 
+	- there is a lot of data with lots of transformations making it easier to process at sequences
+	
+	components run (asynchronously) meaning one process at a time
+	they take in data - process it - spit it out for another component to then take
+
+	if components break the system can still work with output from last broken component, 
+	but this can turn stale
+
+pg(36)
+next ask with te current solution looks like (if any).
+in this case it is solved by a team of experts getting together and gathering up-to-date information 
+and when they can't get the median housing price information they manually estimate it.
+
+this is costly and time-consuming, and when they get median prices they tend to be off by 10%.
+the company thinks it will be useful to train a model to do so because it has access to the census - 
+- which has median housing prices on thousands of districts as well as other useful data
+
+pg(37)
+begining with designing the system is it supervised, unsupervised, reinforcement?
+
+(supervised) seems like the pick due to the data coming in label with districts and their prices
+- each district comes with its expected output already - 
+- this would be different if it didn't come with prices and would need to modeled with factors -
+- (the solution is a model that can predict a price based on the district).
+this would be (regression) algorithm that takes the (district and other variable) and outputs it value
+- it will take population, income, etc -
+- this will make multiple regressions and then come to a consensus on a output.
+it is a (univariante regression) problem meaning it only outputs one value per district, the price
+- it would be (multivariate) if it had to output multiple values per district
+no continuos flow of dta is needed since we get it all right away so batch will be fine
+- if huge you could split batch learning across multiple servers using (MapReduce technique) -
+- or an online learning technique
+
+SELECT PERFORMANCE MEASURE - pg(37)
+typical performance measure for regression is the (ROOT MEAN SQUARE ERROR)
+this gives an idea of how much error the sytem will make in predicts with a higher weight on larger errors
+
+find equation on bottom of (page 37)
+or look upt RMSE formula - (ROOT MEAN SQUARE ERROR) formula
+it starts with (i=1) and goes until ((m) = (i)) incrementing (i)
+RMSE(X, h) = sqrt( 1/m * (i=1)for-each(m)[ (h(x#i) - y#i)^2 ] )
+# is used to mark vectors
+
+	NOTATIONS - pg(38)
+	- (m) is the number of instances in the dataset
+	- (x#i) or (y#i) is the (vector - collection of data) of that instance
+	  (x#i) gets everthing like features but excludes label while 
+	  (y#i) gets the label but excludes all features, output for instance
+	- (X) is a matrix of all feature values for all instances in the dataset
+	  one row per instance (x#i) and i^th row equal to (transpose-the column and rows of 
+	  matrices flipped), this just means the data row of that instance is x#i#T
+	- (h) is the prediction function, also called a (hypothesis)
+	  when given a instances vector of x#i it outputs a predicted value of (y#^i) = (h(x#i))
+	  this is that (y#^i) is the prediction make off vector using function.
+	  this is then used to get prediction error by subtracting the real value and 
+	  predicted giving the prediction error.
+	  this is [h(x#i) - y#i] or [y#^i - y#i] giving the direct error in equation.
+	  y#^i is also called the "y-hat"
+	- RMSE(X, h) is the cost function measured on the set of example (X) using the hypothesis (h)
+	book text type key:
+	- italic font for scalar values (direct values like 1 or 2) like (m and h)
+	- lowercase bold for vectors like (x#i)
+	- uppercase bold for matrices like (X)
+
+pg(39)
+while RMSE is generally preferred when working with performance measure for regression another function is viable.
+MAE or MEAN ABSOLUTE ERROR can be used it the dataset contains many outliers, (i think it works because in uses 
+absolute value instead of square to scale down the the larger data points).
+this is also called AVERAGE ABSOLUTE DEVIATION.
+
+it starts with (i=1) and goes until ((m) = (i)) incrementing (i)
+MAE(X, h) = ( 1/m * (i=1)for-each(m)[ | h(x#i) - y#i | ] )
+	  
+both RMSE and MAE measure the distance between two vector, the vector of prediction and vector label.
+varias distance measures, called (norms), are possible:
+- computing the root of a sume of square RMSE which corresponds to (Euclidean norm)
+  which is the notion of distance in first equation. 
+  it is also caled the lv2 norm noted as || * ||v2 or || * || - think it can just be refered to by
+- computing sum of absolutes MAE which corresponds to lv2 noted || * ||v1.
+  sometimes called the Manhattan norm because it measures distance between to points in city if you can only
+  travel along (orthogonal-right angle) city blocks - just traveling in shapes of squares and rectangles.
+- the lvk norm of a vector (v) of elements (n) is 
+  || v ||vk = (|vv0|^k + |vv1|^k + ... + |vvn|^k)^1/k
+  lv0 gives the number of non-zero elements and lv(infinity) gives maximum absolute value in vector.
+  - no idea about this one .............................
+- higher norm index the more it focuses on large values and neglects small ones.
+  this is because the higher the index makes it more sensative to 
+  bigger values becuase they scale more rapidly than samller.
+  for example:
+  in RMSE the ^2 makes a higher index but also more sensative to bigger values becuase 
+  that square affects the numbers within it at different rates.
+  but when outliers are exponetially rare like in a bell curve RMSE performs well and is preferred.
+
+CHECK ASSUMPTIONS - pg(40)
+good practice to check assumptions before begining to catch any series potential issues early on.
+for example:
+the system will create a regression to get the exact data points and feed it down the system, so we are ASSUMING
+that it needs the exact value. what if later on the value is taken and just put into 3 categories "cheap" "medium" 
+and "expensive". then getting the exact value was useless because it was unnecessary and a (classification) 
+would have worked fine.
+
+GET THE DATA - pg(40)
+time to get to work - go to jupyter notebook and work along with it
+
+"""
+this begins work in the the jupyter lab folder ML/chap_two
+"""
+
+to run stuff just boot up anaconda and run my jupyter lab
+if need more advanced steps to do all that is needed like getting numpy and scikit learn use: 40-43
+
+DOWNLOAD THE DATA - pg(43) 
+
+
+
